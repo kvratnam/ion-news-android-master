@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cwv_main_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.mantra.ionnews.ui.activities.WebViewActivity"
+    tools:showIn="@layout/activity_web_view">
+
+    <WebView
+        android:id="@+id/cwv_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:id="@+id/cwv_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/web_view_progress_bar_height"
+        android:layout_alignParentTop="true"
+        android:indeterminate="true"
+        android:progressDrawable="@drawable/ic_progress_gradient" />
+
+</RelativeLayout>

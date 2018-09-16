@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "799656804351",
+    "firebase_url": "https://ionnews-481a8.firebaseio.com",
+    "project_id": "ionnews-481a8",
+    "storage_bucket": "ionnews-481a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799656804351:android:e8d38643123ab218",
+        "android_client_info": {
+          "package_name": "com.mantra.ionnews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799656804351-dh10of66bksi4mjht3f6cvitffqhmtc1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mantra.ionnews",
+            "certificate_hash": "31d8698c63dcde58dc9fe084362b0c859cfab546"
+          }
+        },
+        {
+          "client_id": "799656804351-6v1ka95sa5782k211kve7qpq07vlkgp3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfiqi9GeuDLpkosoMXgDyZiZaNi55JPuU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799656804351-6v1ka95sa5782k211kve7qpq07vlkgp3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

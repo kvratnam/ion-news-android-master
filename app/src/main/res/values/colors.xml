@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#5D4393</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#5D4393</color>
+
+    <color name="colorAccentDark">#4A3575</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="grayDark">#666666</color>
+    <color name="grayLight">#999999</color>
+
+    <color name="tabText">#C1C1C1</color>
+    <color name="tabTextAlt">#000000</color>
+
+    <color name="signInForgotPassword">#666666</color>
+
+    <color name="profileIconBackground">#6C2AB1</color>
+    <color name="profileSubHeaderText">#999999</color>
+
+    <color name="storyItemBackground">#5D130F</color>
+    <color name="storyItemBackgroundDarker">#390C0B</color>
+    <color name="storyItemBackgroundStart">#77000000</color>
+
+    <color name="settingsTitleText">#222222</color>
+    <color name="settingsDescriptionText">#777777</color>
+
+    <color name="profileImageOverlay">#66000000</color>
+
+    <color name="progressGradientUp">#5D4393</color>
+    <color name="progressgradientBottom">#FFFFFF</color>
+
+    <color name="settingsGradientBottom">#F2F2F2</color>
+    <color name="settingsGradientUp">#DDDDDD</color>
+</resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <RelativeLayout
+        android:id="@+id/fn_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_header_height">
+
+        <ImageView
+            android:layout_width="@dimen/app_header_height"
+            android:layout_height="@dimen/app_header_height"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_logo"
+            android:transitionName="@string/logo_transition" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/news_header_icon_margin">
+
+            <RelativeLayout
+                android:id="@+id/fn_profile_sec"
+                style="@style/NewsHeaderIcon"
+                android:layout_width="@dimen/news_header_icon"
+                android:layout_height="@dimen/news_header_icon"
+                android:gravity="center"
+                android:padding="@dimen/news_header_icon_padding">
+
+                <TextView
+                    android:id="@+id/fn_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_user_icon"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite" />
+            </RelativeLayout>
+
+            <!--
+                        <ImageView
+                            android:id="@+id/fn_notifications"
+                            style="@style/NewsHeaderIcon"
+                            android:layout_width="@dimen/news_header_icon"
+                            android:layout_height="@dimen/news_header_icon"
+                            android:src="@drawable/ic_notification" />
+            -->
+
+            <ImageView
+                android:id="@+id/fn_news_grid"
+                style="@style/NewsHeaderIcon"
+                android:layout_width="@dimen/news_header_icon"
+                android:layout_height="@dimen/news_header_icon"
+                android:src="@drawable/ic_news_grid_layout" />
+
+            <!--
+                        <ImageView
+                            android:id="@+id/fn_settings"
+                            style="@style/NewsHeaderIcon"
+                            android:layout_width="@dimen/news_header_icon"
+                            android:layout_height="@dimen/news_header_icon"
+                            android:src="@drawable/ic_settings" />
+            -->
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.mantra.ionnews.ui.customui.SlidingTabLayout
+        android:id="@+id/fn_tab_layout"
+        style="@style/CustomTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/custom_tab_height"
+        android:layout_below="@id/fn_header" />
+
+    <com.mantra.ionnews.utils.ScrollSwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/fn_tab_layout">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/fn_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.mantra.ionnews.utils.ScrollSwipeRefreshLayout>
+</RelativeLayout>

@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">ION News</string>
+
+    <!--Onboarding-->
+    <string name="welcome_to">WELCOME TO</string>
+    <string name="beautifully_organizing_the_world_s_stories">Beautifully organizing the world\'s stories</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign up</string>
+    <string name="email">Email</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="password">Password</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="create_account">Create Account</string>
+    <string name="organization">Organization</string>
+    <string name="designation">Designation</string>
+    <string name="forgot_password_button">Forgot Password?</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="next">Next</string>
+    <string name="forgot_password_check_mail_alert">Instructions on how to reset your password were sent to your email!</string>
+    <string name="user_group">Role</string>
+
+    <!--Notifications-->
+
+    <!--Settings-->
+    <string name="settings">Settings</string>
+    <string name="general">General</string>
+    <string name="about">About</string>
+    <string name="help_feedback"><![CDATA[Help & Feedback]]></string>
+
+    <!--Profile-->
+    <string name="likes">Likes</string>
+    <string name="save">Save</string>
+    <string name="no_change_in_profile">No change in profile!</string>
+    <string name="collections">Collections</string>
+
+    <!--Dashboard-->
+    <string name="logo_transition">logoTransition</string>
+    <string name="back_to_top">Back to Top</string>
+
+    <!--Progress Dialogs-->
+    <string name="signing_in">Signing in...</string>
+    <string name="signing_up">Signing up...</string>
+    <string name="loading">Loading...</string>
+    <string name="saving">Saving...</string>
+
+    <!--Toast Messages-->
+    <string name="unable_to_connect">Unable to connect!</string>
+    <string name="network_error">Please check your network connection!</string>
+    <string name="retry">Retry</string>
+    <string name="saved">Saved!</string>
+
+    <!--Error Messages-->
+    <string name="error_invalid_email">Please enter a valid email!</string>
+    <string name="error_invalid_password">Password should be at least 5 characters!</string>
+    <string name="error_invalid_phone_number">Please enter a valid phone number!</string>
+    <string name="error_invalid_user_group">Please select a role!</string>
+    <string name="error_invalid_name">Please enter a valid name!</string>
+    <string name="some_error_occured">Some error occured!</string>
+    <string name="error_no_internet_connection">Error: No Internet Connection!</string>
+
+    <!--Dummy Text-->
+</resources>

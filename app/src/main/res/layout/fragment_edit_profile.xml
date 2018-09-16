@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <RelativeLayout
+        android:id="@+id/bsep_main_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/activity_margin_half">
+
+        <RelativeLayout
+            android:id="@+id/bsep_header"
+            android:layout_width="match_parent"
+            android:layout_height="36dp">
+
+            <ImageView
+                android:id="@+id/bsep_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:paddingLeft="@dimen/activity_margin_half"
+                android:paddingRight="@dimen/activity_margin_half"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/bsep_save"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:paddingLeft="@dimen/activity_margin"
+                android:paddingRight="@dimen/activity_margin"
+                android:text="@string/save"
+                android:textColor="@color/colorBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bsep_image_sec"
+            android:layout_width="@dimen/edit_profile_image"
+            android:layout_height="@dimen/edit_profile_image"
+            android:layout_below="@id/bsep_header"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/activity_margin_half"
+            android:background="@drawable/ic_profile_image_background">
+
+            <com.mantra.ionnews.ui.customui.CircularImageView
+                android:id="@+id/bsep_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_profile_image_overlay"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:layout_width="@dimen/edit_profile_edit_icon"
+                android:layout_height="@dimen/edit_profile_edit_icon"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_edit" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/bsep_image_sec"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                style="@style/OnboardingFormField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/bsep_first_name"
+                    style="@style/OnboardingFormInputField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/first_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName|textCapWords" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                style="@style/OnboardingFormField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/bsep_last_name"
+                    style="@style/OnboardingFormInputField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/last_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName|textCapWords" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                style="@style/OnboardingFormField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/bsep_email"
+                    style="@style/OnboardingFormInputField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                style="@style/OnboardingFormField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/bsep_phone_number"
+                    style="@style/OnboardingFormInputField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="0123456789"
+                    android:hint="@string/phone_number"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                style="@style/OnboardingFormField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/bsep_organization"
+                    style="@style/OnboardingFormInputField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/organization"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                style="@style/OnboardingFormField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/bsep_designation"
+                    style="@style/OnboardingFormInputField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/designation"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapWords" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/bsep_user_group_dropdown"
+                style="@style/OnboardingFormField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/bsep_user_group"
+                    style="@style/OnboardingFormInputField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_arrow_drop_down"
+                    android:hint="@string/user_group" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

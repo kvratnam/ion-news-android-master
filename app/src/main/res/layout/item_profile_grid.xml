@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mantra.ionnews.ui.customui.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ipg_entire_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_story_item_background">
+
+    <ImageView
+        android:id="@+id/ipg_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:id="@+id/ipg_translucent_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_profile_grid_item_overlay" />
+
+    <ImageView
+        android:id="@+id/ipg_options"
+        android:layout_width="@dimen/likes_item_options_icon"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/likes_item_padding"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/ipg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/likes_item_padding"
+        android:layout_marginLeft="@dimen/likes_item_padding"
+        android:layout_marginRight="@dimen/likes_item_options_icon"
+        android:layout_marginTop="@dimen/likes_item_padding"
+        android:ellipsize="end"
+        android:lineSpacingExtra="@dimen/likes_item_title_line_spacing"
+        android:textAllCaps="true"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/likes_item_title" />
+
+    <TextView
+        android:id="@+id/ipg_news"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="@dimen/likes_item_padding"
+        android:layout_marginLeft="@dimen/likes_item_padding"
+        android:layout_marginRight="@dimen/likes_item_padding"
+        android:ellipsize="end"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/likes_item_news"
+        android:visibility="gone" />
+</com.mantra.ionnews.ui.customui.SquareRelativeLayout>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/activity_margin_half">
+
+        <RelativeLayout
+            android:id="@+id/bss_header"
+            android:layout_width="match_parent"
+            android:layout_height="36dp">
+
+            <ImageView
+                android:id="@+id/bss_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:paddingLeft="@dimen/activity_margin_half"
+                android:paddingRight="@dimen/activity_margin_half"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                style="@style/BaseTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:paddingLeft="@dimen/activity_margin"
+                android:paddingRight="@dimen/activity_margin"
+                android:text="@string/settings"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/settings_header_title" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/bss_header"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/SettingsSecTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/general" />
+
+            <LinearLayout
+                android:id="@+id/bss_about_sec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/SettingsItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about" />
+
+                <TextView
+                    android:id="@+id/bss_about_desc"
+                    style="@style/SettingsItemDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    style="@style/SettingsItemDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/settings_divider_height" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bss_help_feedback_sec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/SettingsItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/help_feedback" />
+
+                <View
+                    style="@style/SettingsItemDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/settings_divider_height" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bss_logout_sec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/SettingsItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Logout" />
+
+                <View
+                    style="@style/SettingsItemDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/settings_divider_height" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

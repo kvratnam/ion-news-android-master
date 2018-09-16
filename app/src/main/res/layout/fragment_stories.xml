@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <RelativeLayout
+        android:id="@+id/fs_main_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/activity_margin"
+        android:layout_marginLeft="@dimen/activity_margin"
+        android:layout_marginRight="@dimen/activity_margin_double"
+        android:background="@drawable/ic_story_item_background">
+
+        <ImageView
+            android:id="@+id/fs_main_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <View
+            android:id="@+id/fs_translucent_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ic_story_item_overlay"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/activity_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fs_source"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/fs_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:lineSpacingExtra="@dimen/news_title_line_spacing"
+                android:maxLines="3"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/news_title"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fs_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/fs_hashtags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:textColor="@color/colorWhite"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,100 @@
+<resources>
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="activity_margin_half">8dp</dimen>
+    <dimen name="activity_margin_double">32dp</dimen>
+
+    <dimen name="button_default_padding">10dp</dimen>
+
+    <dimen name="accent_button_text">16sp</dimen>
+    <dimen name="accent_button_horizontal_padding">16dp</dimen>
+    <dimen name="accent_button_vertical_padding">16dp</dimen>
+    <dimen name="accent_button_corner">4dp</dimen>
+
+    <dimen name="onboarding_logo">72dp</dimen>
+    <dimen name="onboarding_margin">16dp</dimen>
+    <dimen name="onboarding_title_spacing_vertical">16dp</dimen>
+    <dimen name="onboarding_title_spacing_horizontal">4dp</dimen>
+    <dimen name="onboarding_intro_small">32sp</dimen>
+    <dimen name="onboarding_intro_big">48sp</dimen>
+    <dimen name="onboarding_caption">28sp</dimen>
+    <dimen name="onboarding_login_sec_text">14sp</dimen>
+    <dimen name="onboarding_form_margin">10dp</dimen>
+    <dimen name="onboarding_form_vertical_spacing">12dp</dimen>
+    <dimen name="onboarding_form_title">32sp</dimen>
+
+    <dimen name="sign_in_forgot_password">13sp</dimen>
+    <dimen name="sign_up_peek_height">300dp</dimen>
+    <dimen name="forgot_password_alert">18sp</dimen>
+
+    <dimen name="app_header_height">72dp</dimen>
+
+    <dimen name="news_header_icon">32dp</dimen>
+    <dimen name="news_header_icon_padding">4dp</dimen>
+    <dimen name="news_header_icon_margin">10dp</dimen>
+    <dimen name="news_title">19sp</dimen>
+    <dimen name="news_title_line_spacing">1dp</dimen>
+
+    <dimen name="news_detail_image_min_height">160dp</dimen>
+    <dimen name="news_detail_title">20sp</dimen>
+    <dimen name="news_detail_title_line_spacing">1dp</dimen>
+    <dimen name="news_detail_content">14sp</dimen>
+    <dimen name="news_detail_extra_content">12sp</dimen>
+    <dimen name="news_detail_content_margin_top">4dp</dimen>
+    <dimen name="news_detail_content_line_spacing">2dp</dimen>
+    <dimen name="news_detail_hashtags_padding">6dp</dimen>
+    <dimen name="news_detail_hashtags_margin">8dp</dimen>
+    <dimen name="news_detail_header_height">56dp</dimen>
+    <dimen name="news_detail_header_title">18sp</dimen>
+    <dimen name="news_detail_header_padding">12dp</dimen>
+    <dimen name="news_detail_header_icon">48dp</dimen>
+    <dimen name="news_detail_header_icon_padding">8dp</dimen>
+    <dimen name="news_detail_footer_height">48dp</dimen>
+    <dimen name="news_detail_footer_icon">24dp</dimen>
+    <dimen name="news_detail_footer_icon_margin">12dp</dimen>
+
+    <dimen name="news_detail_menu_width">184dp</dimen>
+    <dimen name="news_detail_menu_padding">6dp</dimen>
+    <dimen name="news_detail_menu_item">15sp</dimen>
+    <dimen name="news_detail_menu_item_padding_horizontal">24dp</dimen>
+    <dimen name="news_detail_menu_item_padding_vertical">8dp</dimen>
+
+    <dimen name="news_detail_footer_menu_padding">10dp</dimen>
+    <dimen name="news_detail_footer_menu_item_height">56dp</dimen>
+    <dimen name="news_detail_footer_menu_item_padding_horizontal">8dp</dimen>
+    <dimen name="news_detail_footer_menu_item_icon">32dp</dimen>
+    <dimen name="news_detail_footer_menu_item_text">16sp</dimen>
+
+    <dimen name="custom_tab_height">64dp</dimen>
+    <dimen name="custom_tab_padding">16dp</dimen>
+    <dimen name="custom_tab_padding_horizontal">24dp</dimen>
+    <dimen name="custom_tab_text">29sp</dimen>
+
+    <dimen name="profile_header_image">64dp</dimen>
+    <dimen name="profile_header_image_text">26sp</dimen>
+    <dimen name="profile_header_icon">32dp</dimen>
+    <dimen name="profile_header_news_icon">32dp</dimen>
+    <dimen name="profile_header_min_height">128dp</dimen>
+    <dimen name="profile_name">32sp</dimen>
+    <dimen name="profile_details_value">14sp</dimen>
+    <dimen name="profile_details_title">11sp</dimen>
+    <dimen name="profile_details_item_padding">3dp</dimen>
+
+    <dimen name="likes_item_margin">2dp</dimen>
+    <dimen name="likes_item_padding">8dp</dimen>
+    <dimen name="likes_item_title">15sp</dimen>
+    <dimen name="likes_item_news">12sp</dimen>
+    <dimen name="likes_item_title_line_spacing">4dp</dimen>
+    <dimen name="likes_item_options_icon">24dp</dimen>
+
+    <dimen name="edit_profile_image">96dp</dimen>
+    <dimen name="edit_profile_edit_icon">32dp</dimen>
+
+    <dimen name="settings_margin_horizontal">16dp</dimen>
+    <dimen name="settings_margin_vertical">18dp</dimen>
+    <dimen name="settings_desc_spacing">4dp</dimen>
+    <dimen name="settings_divider_height">0.5dp</dimen>
+    <dimen name="settings_header_title">18sp</dimen>
+
+    <dimen name="web_view_progress_bar_height">3dp</dimen>
+    <dimen name="default_elevation">2dp</dimen>
+</resources>
