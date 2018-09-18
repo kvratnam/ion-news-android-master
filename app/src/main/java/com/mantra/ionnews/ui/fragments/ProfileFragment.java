@@ -445,7 +445,8 @@ public class ProfileFragment extends BaseFragment
         if (dashboardRequest.getStoriesResponse().equals(STORIES_RESPONSE)) {
             if (refreshLayout != null) refreshLayout.setRefreshing(false);
             storiesResponseList = LocalStorage.getInstance(getContext()).getStories();
-            if (!isLikeView) profileGridAdapter.notifyDataSetChanged();
+            if (!isLikeView)
+                profileGridAdapter.notifyDataSetChanged();
             setUpProfileGrid();
             setStoriesCount(storiesResponseList.size());
         }

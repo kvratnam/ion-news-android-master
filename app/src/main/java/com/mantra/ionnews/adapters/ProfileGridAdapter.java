@@ -131,8 +131,21 @@ public class ProfileGridAdapter extends RecyclerView.Adapter<ProfileGridAdapter.
 
     @Override
     public int getItemCount() {
-        if (isLikeView) return storyList.size();
-        else return storiesResponses.size();
+        if (isLikeView) {
+            //added to handle null in notifiychange
+            if (storyList != null) {
+                return storyList.size();
+            } else {
+                return 0;
+            }
+
+        } else {
+            if (storiesResponses != null) {
+                return storiesResponses.size();
+            } else {
+                return 0;
+            }
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
