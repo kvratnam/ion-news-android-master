@@ -146,7 +146,7 @@ public class EditProfileFragment extends BaseFragment
         save = (TextView) rootView.findViewById(R.id.bsep_save);
 
         disableEditTexts(etEmail);
-        disableEditTexts(etPhoneNumber);
+      //  disableEditTexts(etPhoneNumber);
         disableEditTexts(etUserGroup);
     }
 
@@ -188,13 +188,15 @@ public class EditProfileFragment extends BaseFragment
         String newLastName = etLastName.getText().toString().trim();
         String newOrganization = etOrganization.getText().toString().trim();
         String newDesignation = etDesignation.getText().toString().trim();
+        String newMobileNum = etPhoneNumber.getText().toString().trim();
         String newRole = selectedUserGroup;
         if (!user.getFirstName().equals(newFirstName)
                 || !user.getLastName().equals(newLastName)
                 || !user.getCompany().equals(newOrganization)
                 || !user.getDesignation().equals(newDesignation)
+                || !user.getPhone().equals(newMobileNum)
                 || !user.getRole().equals(newRole)) {
-            initEditProfileRequest(newFirstName, newLastName, newOrganization, newDesignation, selectedUserGroup, selectedUserGroupId);
+            initEditProfileRequest(newFirstName, newLastName, newOrganization, newDesignation, newMobileNum,selectedUserGroup, selectedUserGroupId);
         } else if (newProfileImg) {
             showToastMessage(getString(R.string.saved), false);
             Util.hideSoftKeyboard(getActivity());
@@ -211,11 +213,11 @@ public class EditProfileFragment extends BaseFragment
     }
 
     private void initEditProfileRequest(String firstName, String lastName, String organization,
-                                        String designation, String role, int roleId) {
+                                        String designation, String mobile,String role, int roleId) {
         if (Util.hasInternetAccess(getContext())) {
             EditProfileDataHandler editProfileDataHandler = new EditProfileDataHandler(this, getContext());
             editProfileDataHandler.request(RequestBuilder.
-                    getEditProfileRequest(firstName, lastName, organization, designation, role, roleId));
+                    getEditProfileRequest(firstName, lastName, organization, designation,mobile, role, roleId));
             showProgressDialog(getString(R.string.loading));
         } else {
             showNetworkErrorMessage(
@@ -231,6 +233,9 @@ public class EditProfileFragment extends BaseFragment
         if (user.getLastName() == null) user.setLastName("");
         if (user.getCompany() == null) user.setCompany("");
         if (user.getDesignation() == null) user.setDesignation("");
+        if (user.getPhone() == null) user.setPhone("");
+
+
 
         etFirstName.setText(user.getFirstName());
         etLastName.setText(user.getLastName());
@@ -288,6 +293,7 @@ public class EditProfileFragment extends BaseFragment
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Bitmap yourSelectedImage = null;
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
             if (data == null) {
@@ -304,7 +310,7 @@ public class EditProfileFragment extends BaseFragment
                 String filePath = cursor.getString(columnIndex);
                 cursor.close();
 
-                Bitmap yourSelectedImage = null;
+
                 try {
                     yourSelectedImage = decodeUri(getContext(), selectedImage);
                     setProfileImage(yourSelectedImage, null);
@@ -394,8 +400,12 @@ public class EditProfileFragment extends BaseFragment
             user.setRoleId(editProfileResponse.getRoleId());
 
             LocalStorage.getInstance(getContext()).setUser(user);
+            Activity activity = getActivity();
+            if(activity != null){
 
-            showToastMessage(getString(R.string.saved), false);
+                showToastMessage(getString(R.string.saved), false);
+            }
+
             Util.hideSoftKeyboard(getActivity());
             getActivity().getSupportFragmentManager().popBackStack();
         } else {
@@ -408,6 +418,7 @@ public class EditProfileFragment extends BaseFragment
         hideProgressDialog();
         if (error == null) {
             newProfileImg = true;
+            /*todo upload image should get here*/
             user = LocalStorage.getInstance(getContext()).getUser();
             showToastMessage(getString(R.string.saved), false);
         } else {

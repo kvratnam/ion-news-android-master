@@ -9,6 +9,7 @@ import static com.mantra.ionnews.utils.AppConstants.KEY_DEVICE_TYPE;
 import static com.mantra.ionnews.utils.AppConstants.KEY_EMAIL;
 import static com.mantra.ionnews.utils.AppConstants.KEY_FIRST_NAME;
 import static com.mantra.ionnews.utils.AppConstants.KEY_LAST_NAME;
+import static com.mantra.ionnews.utils.AppConstants.KEY_MOBILE;
 import static com.mantra.ionnews.utils.AppConstants.KEY_ORGANIZATION;
 import static com.mantra.ionnews.utils.AppConstants.KEY_PASSWORD;
 import static com.mantra.ionnews.utils.AppConstants.KEY_PHONE;
@@ -80,7 +81,7 @@ public class RequestBuilder {
     }
 
     public static JSONObject getEditProfileRequest(String firstName, String lastName,
-                                                   String organization, String designation,
+                                                   String organization, String designation,String mobile,
                                                    String role, int roleId) {
         JSONObject jsonObject = new JSONObject();
 
@@ -89,6 +90,7 @@ public class RequestBuilder {
             jsonObject.put(KEY_LAST_NAME, lastName);
             jsonObject.put(KEY_ORGANIZATION, organization);
             jsonObject.put(KEY_DESIGNATION, designation);
+            jsonObject.put(KEY_PHONE, mobile);
             jsonObject.put(KEY_ROLE, role);
             jsonObject.put(KEY_ROLE_ID, roleId);
             return jsonObject;

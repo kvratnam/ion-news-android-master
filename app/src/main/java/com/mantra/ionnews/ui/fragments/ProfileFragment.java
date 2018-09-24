@@ -196,8 +196,10 @@ public class ProfileFragment extends BaseFragment
         updateSubHeaderDetails();
 
         profileGridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
-        if (isLikeView) profileGridAdapter = new ProfileGridAdapter(null, likesItemList, this);
-        else profileGridAdapter = new ProfileGridAdapter(storiesResponseList, null, this);
+        if (isLikeView)
+            profileGridAdapter = new ProfileGridAdapter(null, likesItemList, this);
+        else
+            profileGridAdapter = new ProfileGridAdapter(storiesResponseList, null, this);
         profileGridRv.setLayoutManager(profileGridLayoutManager);
         if (!isDecorationAdded) {
             isDecorationAdded = true;
@@ -208,15 +210,15 @@ public class ProfileFragment extends BaseFragment
 
     private void updateSubHeaderDetails() {
         if (isLikeView) {
-            tvLikes.setTextColor(ContextCompat.getColor(getContext(), R.color.colorBlack));
-            tvLikesHint.setTextColor(ContextCompat.getColor(getContext(), R.color.colorBlack));
-            tvStories.setTextColor(ContextCompat.getColor(getContext(), R.color.profileSubHeaderText));
-            tvStoriesHint.setTextColor(ContextCompat.getColor(getContext(), R.color.profileSubHeaderText));
+            tvLikes.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorBlack));
+            tvLikesHint.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorBlack));
+            tvStories.setTextColor(ContextCompat.getColor(getActivity(), R.color.profileSubHeaderText));
+            tvStoriesHint.setTextColor(ContextCompat.getColor(getActivity(), R.color.profileSubHeaderText));
         } else {
-            tvLikes.setTextColor(ContextCompat.getColor(getContext(), R.color.profileSubHeaderText));
-            tvLikesHint.setTextColor(ContextCompat.getColor(getContext(), R.color.profileSubHeaderText));
-            tvStories.setTextColor(ContextCompat.getColor(getContext(), R.color.colorBlack));
-            tvStoriesHint.setTextColor(ContextCompat.getColor(getContext(), R.color.colorBlack));
+            tvLikes.setTextColor(ContextCompat.getColor(getActivity(), R.color.profileSubHeaderText));
+            tvLikesHint.setTextColor(ContextCompat.getColor(getActivity(), R.color.profileSubHeaderText));
+            tvStories.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorBlack));
+            tvStoriesHint.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorBlack));
         }
     }
 
