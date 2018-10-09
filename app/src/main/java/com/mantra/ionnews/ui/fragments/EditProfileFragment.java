@@ -420,6 +420,7 @@ public class EditProfileFragment extends BaseFragment
             newProfileImg = true;
             /*todo upload image should get here*/
             user = LocalStorage.getInstance(getContext()).getUser();
+
             showToastMessage(getString(R.string.saved), false);
         } else {
             showToastMessage(error.getMessage(), false);

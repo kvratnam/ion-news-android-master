@@ -11,7 +11,7 @@ public class AppConstants {
     public static final String APP_NAME = "Ion News";
 
    // public static final String BASE_DEV_URL = "http://34.211.114.131/api/";
-    public static final String BASE_DEV_URL = "http://52.13.7.226/api/";
+    public static final String BASE_DEV_URL = "http://50.112.57.146/api/";
     public static final String BASE_PROD_URL = "http://52.89.47.47/api/";
 
     public static final String BASE_URL = IS_DEV ? BASE_DEV_URL : BASE_PROD_URL;
