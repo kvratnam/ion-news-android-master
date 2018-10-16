@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ad_main_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -7,10 +8,26 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/ad_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
+        android:layout_height="match_parent" />
+<!-- android:layout_above="@+id/bottomBar"-->
     <FrameLayout
         android:id="@+id/ad_fragment_container"
         android:layout_width="match_parent"
+
         android:layout_height="match_parent" />
+    <!--android:layout_above="@+id/bottomBar"-->
+    <!--<android.support.design.widget. android.support.v4.app.Fragment
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemTextColor="@color/colorWhite"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@color/colorWhite"
+        android:fitsSystemWindows="true"
+        android:animateLayoutChanges="false"
+        android:splitMotionEvents="false"
+        android:forceHasOverlappingRendering="true"
+        app:menu="@menu/navigation" />-->
 </RelativeLayout>

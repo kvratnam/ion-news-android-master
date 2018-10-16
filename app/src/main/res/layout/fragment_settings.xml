@@ -7,11 +7,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/activity_margin_half">
+      ><!--  android:paddingTop="@dimen/activity_margin_half"-->
 
         <RelativeLayout
             android:id="@+id/bss_header"
             android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
             android:layout_height="36dp">
 
             <ImageView
@@ -21,6 +22,7 @@
                 android:layout_alignParentLeft="true"
                 android:gravity="center"
                 android:paddingLeft="@dimen/activity_margin_half"
+                android:visibility="gone"
                 android:paddingRight="@dimen/activity_margin_half"
                 android:src="@drawable/ic_back" />
 
@@ -33,7 +35,7 @@
                 android:paddingLeft="@dimen/activity_margin"
                 android:paddingRight="@dimen/activity_margin"
                 android:text="@string/settings"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/settings_header_title" />
         </RelativeLayout>
 

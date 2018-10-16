@@ -59,6 +59,11 @@
     <string name="error_invalid_name">Please enter a valid name!</string>
     <string name="some_error_occured">Some error occured!</string>
     <string name="error_no_internet_connection">Error: No Internet Connection!</string>
+    <string name="list">List</string>
+    <string name="Home">home</string>
+    <string name="search">Search</string>
+    <string name="Profile">Profile</string>
+    <string name="setting">Setting</string>
 
     <!--Dummy Text-->
 </resources>

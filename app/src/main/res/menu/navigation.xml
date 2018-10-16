@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bot_home"
+        android:icon="@drawable/ic_news_grid_layout"
+        android:title="@string/Home"
+        app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/bot_list"
+        android:icon="@drawable/ic_news_grid_layout"
+        android:title="@string/list"
+        app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/bot_search"
+        android:icon="@drawable/ic_news_grid_layout"
+        android:title="@string/search"
+        app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/bot_profile"
+        android:icon="@drawable/ic_news_grid_layout"
+        android:title="@string/Profile"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/bot_setting"
+        android:icon="@drawable/ic_news_grid_layout"
+        android:title="@string/setting"
+        app:showAsAction="always|withText" />
+
+</menu>

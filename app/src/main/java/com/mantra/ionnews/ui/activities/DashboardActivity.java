@@ -1,11 +1,16 @@
 package com.mantra.ionnews.ui.activities;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mantra.ionnews.R;
 import com.mantra.ionnews.adapters.ViewPagerAdapter;
@@ -18,6 +23,7 @@ import com.mantra.ionnews.models.FragmentState;
 import com.mantra.ionnews.models.responses.Error;
 import com.mantra.ionnews.ui.fragments.EditProfileFragment;
 import com.mantra.ionnews.ui.fragments.SettingsFragment;
+import com.mantra.ionnews.utils.BottomNavigationViewHelper;
 import com.mantra.ionnews.utils.LocalStorage;
 import com.mantra.ionnews.utils.Util;
 
@@ -43,7 +49,7 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
     private String TAG = DASHBOARD;
 
     private ViewPager viewPager;
-
+    private BottomNavigationView bottomNavigationView;
     private boolean isFromNotification = false;
     private boolean doubleBackToExitPressedOnce;
 
@@ -57,9 +63,69 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
 
         initView();
         setUpViewPager();
+       // setUpBottomNavBar();
 
         fetchStories();
     }
+
+    private void setUpBottomNavBar() {
+      //  BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        if (bottomNavigationView != null) {
+
+            // Select first menu item by default and show Fragment accordingly.
+
+            Menu menu = bottomNavigationView.getMenu();
+            selectFragment(menu.getItem(0));
+
+            // Set action to perform when any menu-item is selected.
+            bottomNavigationView.setOnNavigationItemSelectedListener(
+                    new BottomNavigationView.OnNavigationItemSelectedListener() {
+                        @Override
+
+                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                            selectFragment(item);
+                            return false;
+                        }
+                    });
+        }
+
+    }
+
+    protected void selectFragment(MenuItem item) {
+
+        item.setChecked(true);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        switch (item.getItemId()) {
+            case R.id.bot_home:
+                Toast.makeText(getApplicationContext(),"cllicked",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.bot_list:
+                Toast.makeText(getApplicationContext(),"cllicked",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.bot_search:
+                Toast.makeText(getApplicationContext(),"cllicked",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.bot_profile:
+
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
+                        .replace(R.id.ad_fragment_container, EditProfileFragment.newInstance(), EDIT_PROFILE)
+                        .addToBackStack(DASHBOARD)
+                        .commit();
+                break;
+
+            case R.id.bot_setting:
+                //FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
+                        .replace(R.id.ad_fragment_container, SettingsFragment.newInstance(), SETTINGS)
+                        .addToBackStack(DASHBOARD)
+                        .commit();
+                break;
+
+        }
+    }
+
 
     private void setUpViewPager() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -69,6 +135,9 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
 
     private void initView() {
         viewPager = (ViewPager) findViewById(R.id.ad_view_pager);
+        /*
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomBar);
+        BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);*/
     }
 
     protected void registerEventBus() {
