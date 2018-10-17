@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
+import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.Editable;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -148,6 +150,49 @@ public class EditProfileFragment extends BaseFragment
         disableEditTexts(etEmail);
       //  disableEditTexts(etPhoneNumber);
         disableEditTexts(etUserGroup);
+
+
+        //US Phone Number Format
+        etPhoneNumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher() {
+            private boolean backspacingFlag = false;
+            private boolean editedFlag = false;
+            private int cursorComplement;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                cursorComplement = s.length()-etPhoneNumber.getSelectionStart();
+                if (count > after) {
+                    backspacingFlag = true;
+                } else {
+                    backspacingFlag = false;
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String string = s.toString();
+                String phone = string.replaceAll("[^\\d]", "");
+                if (!editedFlag) {
+                    if (phone.length() >= 6 && !backspacingFlag) {
+                        editedFlag = true;
+                        String ans = "(" + phone.substring(0, 3) + ") " + phone.substring(3,6) + "-" + phone.substring(6);
+                        etPhoneNumber.setText(ans);
+                        etPhoneNumber.setSelection(etPhoneNumber.getText().length()-cursorComplement);
+                    } else if (phone.length() >= 3 && !backspacingFlag) {
+                        editedFlag = true;
+                        String ans = "(" +phone.substring(0, 3) + ") " + phone.substring(3);
+                        etPhoneNumber.setText(ans);
+                        etPhoneNumber.setSelection(etPhoneNumber.getText().length()-cursorComplement);
+                    }
+                } else {
+                    editedFlag = false;
+                }
+            }
+        });
     }
 
     private void updateFragment() {
@@ -398,6 +443,7 @@ public class EditProfileFragment extends BaseFragment
             user.setDesignation(editProfileResponse.getDesignation());
             user.setRole(editProfileResponse.getRole());
             user.setRoleId(editProfileResponse.getRoleId());
+            user.setPhone(editProfileResponse.getPhone());
 
             LocalStorage.getInstance(getContext()).setUser(user);
             Activity activity = getActivity();

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/IONNewsMaster.iml" filepath="$PROJECT_DIR$/IONNewsMaster.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ion-news-android-master.iml" filepath="$PROJECT_DIR$/ion-news-android-master.iml" />
     </modules>
   </component>
 </project>

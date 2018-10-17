@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
 
 public class BottomNavigationViewHelper {
 
-    @SuppressLint("RestrictedApi")
+    /*@SuppressLint("RestrictedApi")
   public static void removeShiftMode(BottomNavigationView view) {
 
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
@@ -37,5 +37,5 @@ public class BottomNavigationViewHelper {
         } catch (IllegalAccessException e) {
             Log.e("ERROR ILLEGAL ALG", "Unable to change value of shift mode");
         }
-    }
+    }*/
 }

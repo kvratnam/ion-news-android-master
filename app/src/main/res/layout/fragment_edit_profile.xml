@@ -129,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:digits="0123456789"
                     android:hint="@string/phone_number"
+                    android:maxLength="14"
                     android:imeOptions="actionNext"
                     android:inputType="phone" />
             </android.support.design.widget.TextInputLayout>

@@ -22,7 +22,7 @@
                 android:layout_alignParentLeft="true"
                 android:gravity="center"
                 android:paddingLeft="@dimen/activity_margin_half"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:paddingRight="@dimen/activity_margin_half"
                 android:src="@drawable/ic_back" />
 
