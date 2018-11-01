@@ -61,9 +61,20 @@
     <string name="error_no_internet_connection">Error: No Internet Connection!</string>
     <string name="list">List</string>
     <string name="Home">home</string>
-    <string name="search">Search</string>
     <string name="Profile">Profile</string>
     <string name="setting">Setting</string>
 
-    <!--Dummy Text-->
+
+    <string name="no_stories">No Search Results</string>
+    <string name="search">Search</string>
+
+
+    <!--Bottom Navigation Items-->
+    <string name="item_1">Home</string>
+    <string name="item_2">News</string>
+    <string name="item_3">Search</string>
+    <string name="item_4">Profile</string>
+    <string name="nav_settings">Settings</string>
+
+
 </resources>

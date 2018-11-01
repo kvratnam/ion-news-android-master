@@ -13,11 +13,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mantra.ionnews.utils.AppConstants.KEY_ID;
 import static com.mantra.ionnews.utils.AppConstants.KEY_SHARED_PREFS_ALL_LIKES;
 import static com.mantra.ionnews.utils.AppConstants.KEY_SHARED_PREFS_CHANGE_IN_LIKES;
 import static com.mantra.ionnews.utils.AppConstants.KEY_SHARED_PREFS_STORIES;
 import static com.mantra.ionnews.utils.AppConstants.KEY_SHARED_PREFS_TOKEN;
 import static com.mantra.ionnews.utils.AppConstants.KEY_SHARED_PREFS_USER;
+import static com.mantra.ionnews.utils.AppConstants.KEY_USER_ID;
 
 /**
  * Created by TaNMay on 27/09/16.
@@ -117,4 +119,30 @@ public class LocalStorage {
         editor.putString(KEY_SHARED_PREFS_ALL_LIKES, new Gson().toJson(getAllLikesResponse));
         editor.commit();
     }
+
+
+    public String getUserID() {
+        if (sharedPreferences.contains(KEY_USER_ID))
+            return sharedPreferences.getString(KEY_USER_ID, null);
+        else return null;
+    }
+
+    public void setUserID(String userID) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_USER_ID, userID);
+        editor.commit();
+    }
+
+    public String getID() {
+        if (sharedPreferences.contains(KEY_ID))
+            return sharedPreferences.getString(KEY_ID, null);
+        else return null;
+    }
+
+    public void setID(String id) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_ID, id);
+        editor.commit();
+    }
+
 }

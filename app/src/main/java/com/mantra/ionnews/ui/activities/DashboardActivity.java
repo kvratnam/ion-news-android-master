@@ -1,19 +1,29 @@
 package com.mantra.ionnews.ui.activities;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.bottomnavigation.LabelVisibilityMode;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Menu;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.EditText;
 
+import com.google.gson.JsonObject;
 import com.mantra.ionnews.R;
 import com.mantra.ionnews.adapters.ViewPagerAdapter;
+import com.mantra.ionnews.datahandlers.CatagoryTagDataHandler;
+import com.mantra.ionnews.datahandlers.SearchByTagHandler;
 import com.mantra.ionnews.datahandlers.StoriesDataHandler;
 import com.mantra.ionnews.interfaces.BaseResponseInterface;
 import com.mantra.ionnews.interfaces.OnFragmentEventTagListener;
@@ -21,11 +31,20 @@ import com.mantra.ionnews.models.DashboardRequest;
 import com.mantra.ionnews.models.FragmentClick;
 import com.mantra.ionnews.models.FragmentState;
 import com.mantra.ionnews.models.responses.Error;
+import com.mantra.ionnews.ui.fragments.BaseFragment;
 import com.mantra.ionnews.ui.fragments.EditProfileFragment;
+import com.mantra.ionnews.ui.fragments.NewsFragment;
+import com.mantra.ionnews.ui.fragments.ProfileFragment;
+import com.mantra.ionnews.ui.fragments.SearchFragment;
 import com.mantra.ionnews.ui.fragments.SettingsFragment;
-import com.mantra.ionnews.utils.BottomNavigationViewHelper;
+import com.mantra.ionnews.ui.fragments.StoriesFragment;
 import com.mantra.ionnews.utils.LocalStorage;
 import com.mantra.ionnews.utils.Util;
+
+import org.json.JSONObject;
+
+import java.lang.reflect.Field;
+import java.util.logging.Logger;
 
 import de.greenrobot.event.EventBus;
 
@@ -37,6 +56,7 @@ import static com.mantra.ionnews.utils.ConstantClass.PROFILE;
 import static com.mantra.ionnews.utils.ConstantClass.SETTINGS;
 import static com.mantra.ionnews.utils.ConstantClass.STORIES_RESPONSE;
 import static com.mantra.ionnews.utils.ConstantClass.WITH_LIKES;
+import static com.mantra.ionnews.utils.ConstantClass.SEARCH;
 
 /**
  * Created by rajat on 17/03/17.
@@ -45,13 +65,12 @@ import static com.mantra.ionnews.utils.ConstantClass.WITH_LIKES;
 public class DashboardActivity extends BaseActivity implements BaseResponseInterface {
 
     public static OnFragmentEventTagListener onFragmentEventTagListener;
-
     private String TAG = DASHBOARD;
-
     private ViewPager viewPager;
-    private BottomNavigationView bottomNavigationView;
+
     private boolean isFromNotification = false;
     private boolean doubleBackToExitPressedOnce;
+    public static BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,69 +82,49 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
 
         initView();
         setUpViewPager();
-       // setUpBottomNavBar();
-
         fetchStories();
-    }
+        searchByTAG();
+        disableShiftMode(bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener
+                (new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-    private void setUpBottomNavBar() {
-      //  BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        if (bottomNavigationView != null) {
-
-            // Select first menu item by default and show Fragment accordingly.
-
-            Menu menu = bottomNavigationView.getMenu();
-            selectFragment(menu.getItem(0));
-
-            // Set action to perform when any menu-item is selected.
-            bottomNavigationView.setOnNavigationItemSelectedListener(
-                    new BottomNavigationView.OnNavigationItemSelectedListener() {
-                        @Override
-
-                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            selectFragment(item);
-                            return false;
+                        Fragment fragment = null;
+                        switch (item.getItemId()) {
+                            case R.id.action_item1:
+                                fragment = new BaseFragment();
+                                break;
+                            case R.id.action_item2:
+                                fragment = new ProfileFragment();
+                                break;
+                            case R.id.action_item3:
+                                fragment=new SearchFragment();
+                                break;
+                            case R.id.action_item4:
+                                openThisFragment(EDIT_PROFILE);
+                                break;
+                            case R.id.action_item5:
+                                openThisFragment(SETTINGS);
+                                break;
                         }
-                    });
-        }
 
+                        if (fragment != null) {
+                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                                    android.R.anim.fade_out);
+                            fragmentTransaction.replace(R.id.ad_fragment_container, fragment);
+                            fragmentTransaction.commitAllowingStateLoss();
+
+
+                        } else {
+
+                        }
+                        return true;
+
+                    }
+                });
     }
-
-    protected void selectFragment(MenuItem item) {
-
-        item.setChecked(true);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        switch (item.getItemId()) {
-            case R.id.bot_home:
-                Toast.makeText(getApplicationContext(),"cllicked",Toast.LENGTH_LONG).show();
-                break;
-            case R.id.bot_list:
-                Toast.makeText(getApplicationContext(),"cllicked",Toast.LENGTH_LONG).show();
-                break;
-            case R.id.bot_search:
-                Toast.makeText(getApplicationContext(),"cllicked",Toast.LENGTH_LONG).show();
-                break;
-            case R.id.bot_profile:
-
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
-                        .replace(R.id.ad_fragment_container, EditProfileFragment.newInstance(), EDIT_PROFILE)
-                        .addToBackStack(DASHBOARD)
-                        .commit();
-                break;
-
-            case R.id.bot_setting:
-                //FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
-                        .replace(R.id.ad_fragment_container, SettingsFragment.newInstance(), SETTINGS)
-                        .addToBackStack(DASHBOARD)
-                        .commit();
-                break;
-
-        }
-    }
-
 
     private void setUpViewPager() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -135,9 +134,7 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
 
     private void initView() {
         viewPager = (ViewPager) findViewById(R.id.ad_view_pager);
-        /*
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomBar);
-        BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);*/
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
     }
 
     protected void registerEventBus() {
@@ -181,6 +178,9 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
                     this
             );
     }
+
+
+
 
     @Override
     public void response(Object response, Error error) {
@@ -231,5 +231,48 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
 //            }, 2000);
         }
     }
+    @SuppressLint("RestrictedApi")
+    static void disableShiftMode(BottomNavigationView view) {
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
+        try {
+            Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
+            shiftingMode.setAccessible(true);
+            shiftingMode.setBoolean(menuView, false);
+            shiftingMode.setAccessible(false);
+            for (int i = 0; i < menuView.getChildCount(); i++) {
+                BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
+                item.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+
+                // set once again checked value, so view will be updated
+                item.setChecked(item.getItemData().isChecked());
+            }
+        } catch (NoSuchFieldException e) {
+
+        } catch (IllegalAccessException e) {
+
+        }
+    }
+
+
+
+        public void searchByTAG()
+        {
+            JSONObject jsonObject= new JSONObject();
+            try
+            {
+                jsonObject.put("tags","#Arrow Internal Updates");
+                jsonObject.put("user_id","95");
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            SearchByTagHandler searchByTagHandler = new SearchByTagHandler(this, this);
+            if (Util.hasInternetAccess(this)) {
+                searchByTagHandler.request(jsonObject);
+                showProgressDialog(getString(R.string.loading));
+            }
+
+        }
+
 
 }

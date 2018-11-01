@@ -12,5 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         flipview:orientation="vertical"
+        android:layout_marginBottom="60dp"
         flipview:overFlipMode="rubber_band" />
 </LinearLayout>

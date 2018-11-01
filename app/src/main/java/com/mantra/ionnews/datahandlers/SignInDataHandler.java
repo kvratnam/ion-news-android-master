@@ -49,6 +49,8 @@ public class SignInDataHandler implements SuccessListener {
         User user = new Gson().fromJson(responseObject.toString(), User.class);
         localStorage.setUser(user);
         localStorage.setToken(signInResponse.getToken());
+        localStorage.setUserID(signInResponse.getRoleID());
+        localStorage.setID(String.valueOf(signInResponse.getId()));
         baseResponseInterface.response(signInResponse, null);
     }
 

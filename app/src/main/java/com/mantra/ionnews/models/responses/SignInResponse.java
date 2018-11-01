@@ -54,6 +54,10 @@ public class SignInResponse {
     @Expose
     private String token;
 
+    @SerializedName("role_id")
+    @Expose
+    private String roleID;
+
     public Integer getId() {
         return id;
     }
@@ -182,4 +186,12 @@ public class SignInResponse {
         this.token = token;
     }
 
+
+    public String getRoleID() {
+        return roleID;
+    }
+
+    public void setRoleID(String roleID) {
+        this.roleID = roleID;
+    }
 }

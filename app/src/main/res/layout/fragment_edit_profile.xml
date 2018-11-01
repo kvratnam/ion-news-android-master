@@ -175,6 +175,7 @@
                     style="@style/OnboardingFormInputField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="60dp"
                     android:drawableRight="@drawable/ic_arrow_drop_down"
                     android:hint="@string/user_group" />
             </android.support.design.widget.TextInputLayout>

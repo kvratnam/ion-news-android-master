@@ -16,6 +16,8 @@ import static com.mantra.ionnews.utils.AppConstants.KEY_PHONE;
 import static com.mantra.ionnews.utils.AppConstants.KEY_PROFILE_IMAGE;
 import static com.mantra.ionnews.utils.AppConstants.KEY_ROLE;
 import static com.mantra.ionnews.utils.AppConstants.KEY_ROLE_ID;
+import static com.mantra.ionnews.utils.AppConstants.KEY_TAG;
+import static com.mantra.ionnews.utils.AppConstants.KEY_USER_ID;
 import static com.mantra.ionnews.utils.AppConstants.VAL_DEVICE_TYPE;
 import static com.mantra.ionnews.utils.AppConstants.VAL_ROLE;
 import static com.mantra.ionnews.utils.AppConstants.VAL_ROLE_ID;
@@ -41,6 +43,10 @@ public class RequestBuilder {
 
         return null;
     }
+
+
+
+
 
     public static JSONObject getSignUpRequest(String email, String firstName, String lastName,
                                               String password, String phone, String organization,
@@ -113,4 +119,21 @@ public class RequestBuilder {
 
         return null;
     }
+
+
+    public static JSONObject searchByTagRequest(String tag, String userID) {
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put(KEY_USER_ID, userID);
+            jsonObject.put(KEY_TAG, tag);
+            return jsonObject;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
 }

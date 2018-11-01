@@ -22,6 +22,8 @@ public class ConstantClass {
     public static final String STORIES = "STORIES";
     public static final String SETTINGS = "SETTINGS";
     public static final String EDIT_PROFILE = "EDIT_PROFILE";
+    public static final String SEARCH = "SEARCH";
+
     // BottomSheets
     public static final String SIGN_IN = "SIGN_IN";
     public static final String SIGN_UP = "SIGN_UP";

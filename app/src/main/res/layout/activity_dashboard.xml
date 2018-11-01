@@ -14,20 +14,21 @@
     <FrameLayout
         android:id="@+id/ad_fragment_container"
         android:layout_width="match_parent"
-
+        android:layout_marginBottom="50dp"
         android:layout_height="match_parent" />
-    <!--android:layout_above="@+id/bottomBar"-->
-    <!--<android.support.design.widget. android.support.v4.app.Fragment
-        android:id="@+id/bottomBar"
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemTextColor="@color/colorWhite"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@color/colorWhite"
-        android:fitsSystemWindows="true"
-        android:animateLayoutChanges="false"
-        android:splitMotionEvents="false"
-        android:forceHasOverlappingRendering="true"
-        app:menu="@menu/navigation" />-->
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@drawable/bottom_navigation_selection"
+        app:itemTextColor="@drawable/bottom_navigation_selection"
+        android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/navigation"/>
+
+
+
 </RelativeLayout>
