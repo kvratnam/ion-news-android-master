@@ -6,14 +6,10 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.mantra.ionnews.interfaces.BaseResponseInterface;
-import com.mantra.ionnews.models.User;
-import com.mantra.ionnews.models.responses.CategoryStoryResponse;
 import com.mantra.ionnews.models.responses.Error;
 import com.mantra.ionnews.models.responses.SearchTagResponse;
-import com.mantra.ionnews.models.responses.SignInResponse;
 import com.mantra.ionnews.restclient.HttpRequestHandler;
 import com.mantra.ionnews.restclient.SuccessListener;
-import com.mantra.ionnews.utils.LocalStorage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

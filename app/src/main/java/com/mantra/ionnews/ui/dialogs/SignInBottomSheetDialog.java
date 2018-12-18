@@ -70,7 +70,7 @@ public class SignInBottomSheetDialog extends BaseBottomSheetDialog
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
 
-                if ((keyCode == android.view.KeyEvent.KEYCODE_BACK)) {
+                if ((keyCode == KeyEvent.KEYCODE_BACK)) {
                     //This is the filter
                     if (event.getAction() != KeyEvent.ACTION_DOWN) {
                         Log.d(TAG, "onBackPress 3");
@@ -210,6 +210,7 @@ public class SignInBottomSheetDialog extends BaseBottomSheetDialog
 
     private void signInUser() {
         isValidData();
+
     }
 
     public void isValidData() {
@@ -265,6 +266,7 @@ public class SignInBottomSheetDialog extends BaseBottomSheetDialog
         showProgressDialog(getString(R.string.signing_in));
         SignInDataHandler signInDataHandler = new SignInDataHandler(this, getActivity());
         signInDataHandler.request(RequestBuilder.getSignInRequest(email, password, deviceId));
+
     }
 
     @Override

@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,7 +97,8 @@ public class SettingsFragment extends BaseFragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
+               // getActivity().getSupportFragmentManager().popBackStack();
+                fragmentTransaction();
             }
         });
     }
@@ -124,4 +128,42 @@ public class SettingsFragment extends BaseFragment {
         startActivity(i);
         getActivity().finish();
     }
+
+
+    public void fragmentTransaction()
+    {
+
+        Fragment fragment = new BaseFragment();
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                android.R.anim.fade_out);
+        fragmentTransaction.replace(R.id.ad_fragment_container, fragment);
+        fragmentTransaction.commitAllowingStateLoss();
+
+    }
+
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+
+                    fragmentTransaction();
+                    return true;
+                }
+
+                return false;
+            }
+        });
+    }
+
+
 }

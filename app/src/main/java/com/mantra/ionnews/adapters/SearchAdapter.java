@@ -1,34 +1,28 @@
 package com.mantra.ionnews.adapters;
 
-        import android.graphics.Bitmap;
-        import android.graphics.Typeface;
-        import android.graphics.drawable.BitmapDrawable;
-        import android.graphics.drawable.Drawable;
-        import android.os.Build;
-        import android.support.v7.widget.RecyclerView;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.view.ViewTreeObserver;
-        import android.widget.Filter;
-        import android.widget.Filterable;
-        import android.widget.ImageView;
-        import android.widget.TextView;
+import android.graphics.Bitmap;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-        import com.jakewharton.picasso.OkHttp3Downloader;
-        import com.mantra.ionnews.R;
-        import com.mantra.ionnews.interfaces.OnProfileGridItemClickListener;
-        import com.mantra.ionnews.models.Story;
-        import com.mantra.ionnews.models.responses.StoriesResponse;
-        import com.mantra.ionnews.ui.customui.SquareRelativeLayout;
-        import com.squareup.picasso.Picasso;
-        import com.squareup.picasso.Target;
+import com.mantra.ionnews.R;
+import com.mantra.ionnews.interfaces.OnProfileGridItemClickListener;
+import com.mantra.ionnews.models.Story;
+import com.mantra.ionnews.models.responses.StoriesResponse;
+import com.mantra.ionnews.ui.customui.SquareRelativeLayout;
+import com.mantra.ionnews.utils.PicasoImageLoader;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
-        import java.util.ArrayList;
-        import java.util.HashMap;
-        import java.util.List;
-
-        import okhttp3.OkHttpClient;
+import java.util.List;
 
 
 /**
@@ -86,11 +80,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         Target target = new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+  //              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 viewHolder.image.setImageDrawable(new BitmapDrawable(viewHolder.image.getContext().getResources(), bitmap));
-//                } else {
-//                    viewHolder.image.setBackgroundDrawable(new BitmapDrawable(viewHolder.item.getContext().getResources(), bitmap));
-//                }
+  //             } else {
+                    viewHolder.image.setBackgroundDrawable(new BitmapDrawable(viewHolder.item.getContext().getResources(), bitmap));
+ //               }
                 setUpTranslucentView(viewHolder.item, viewHolder.translucentView);
             }
 
@@ -103,18 +97,30 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             public void onPrepareLoad(final Drawable placeHolderDrawable) {
             }
         };
-        if (story.getImage() != null && !story.getImage().isEmpty()) {
-            OkHttpClient client = new OkHttpClient();
-            Picasso.Builder builder = new Picasso.Builder(viewHolder.image.getContext());
-            builder.downloader(new OkHttp3Downloader(client))
-                    .build()
-                    .load(story.getImage())
-                    .into(viewHolder.image);
-//            Picasso.with(viewHolder.item.getContext())
-//                    .load(story.getImage())
-//                    .into(target);
-            viewHolder.image.setTag(target);
+        try {
+            if (story.getImage() != null && !story.getImage().isEmpty()) {
+                /*OkHttpClient client = new OkHttpClient();
+                Picasso.Builder builder = new Picasso.Builder(viewHolder.image.getContext());
+                builder.downloader(new OkHttp3Downloader(client))
+                        .build()
+                        .load(story.getImage())
+                        .into(viewHolder.image);*/
+
+                //        Picasso.with(viewHolder.item.getContext())
+                //              .load(story.getImage())
+                //                .into(target);
+
+
+                PicasoImageLoader.with(viewHolder.image.getContext())
+                        .load(story.getImage())
+                        .into(viewHolder.image);
+                viewHolder.image.setTag(target);
+            }
+        }catch (Exception e)
+        {
+
         }
+
     }
 
     private void setUpTranslucentView(final View mainView, final View translucentView) {
@@ -170,7 +176,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         public ViewHolder(View itemView) {
             super(itemView);
             item = (SquareRelativeLayout) itemView.findViewById(R.id.ipg_entire_item);
-            image = (ImageView) itemView.findViewById(R.id.ipg_image);
+            image = (ImageView) itemView.findViewById(R.id.ipg_image_search);
             title = (TextView) itemView.findViewById(R.id.ipg_title);
             news = (TextView) itemView.findViewById(R.id.ipg_news);
             options = (ImageView) itemView.findViewById(R.id.ipg_options);

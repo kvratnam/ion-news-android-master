@@ -13,18 +13,16 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jakewharton.picasso.OkHttp3Downloader;
 import com.mantra.ionnews.R;
 import com.mantra.ionnews.interfaces.OnProfileGridItemClickListener;
 import com.mantra.ionnews.models.Story;
 import com.mantra.ionnews.models.responses.StoriesResponse;
 import com.mantra.ionnews.ui.customui.SquareRelativeLayout;
+import com.mantra.ionnews.utils.PicasoImageLoader;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import java.util.List;
-
-import okhttp3.OkHttpClient;
 
 /**
  * Created by TaNMay on 06/04/17.
@@ -78,6 +76,8 @@ public class ProfileGridAdapter extends RecyclerView.Adapter<ProfileGridAdapter.
         Target target = new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+
+
 //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 viewHolder.image.setImageDrawable(new BitmapDrawable(viewHolder.image.getContext().getResources(), bitmap));
 //                } else {
@@ -95,18 +95,35 @@ public class ProfileGridAdapter extends RecyclerView.Adapter<ProfileGridAdapter.
             public void onPrepareLoad(final Drawable placeHolderDrawable) {
             }
         };
-        if (story.getImage() != null && !story.getImage().isEmpty()) {
-            OkHttpClient client = new OkHttpClient();
-            Picasso.Builder builder = new Picasso.Builder(viewHolder.image.getContext());
-            builder.downloader(new OkHttp3Downloader(client))
-                    .build()
-                    .load(story.getImage())
-                    .into(viewHolder.image);
-//            Picasso.with(viewHolder.item.getContext())
-//                    .load(story.getImage())
-//                    .into(target);
-            viewHolder.image.setTag(target);
+        try
+        {
+            if (story.getImage() != null && !story.getImage().isEmpty()) {
+                /*OkHttpClient client = new OkHttpClient();
+                Picasso.Builder builder = new Picasso.Builder(viewHolder.image.getContext());
+                builder.downloader(new OkHttp3Downloader(client))
+                        .build()
+                        .load(story.getImage())
+                        .into(viewHolder.image);*/
+
+                //        Picasso.with(viewHolder.item.getContext())
+                //              .load(story.getImage())
+                //                .into(target);
+
+
+                PicasoImageLoader.with(viewHolder.image.getContext())
+                        .load(story.getImage())
+                        .into(viewHolder.image);
+                viewHolder.image.setTag(target);
+
+
+
+            }
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     private void setUpTranslucentView(final View mainView, final View translucentView) {

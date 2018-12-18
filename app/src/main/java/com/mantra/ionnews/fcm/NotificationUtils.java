@@ -165,7 +165,7 @@ public class NotificationUtils {
     }
 
     private int getNotificationIcon() {
-        boolean useWhiteIcon = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
+        boolean useWhiteIcon = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
         return useWhiteIcon ? R.drawable.ic_white_notification : R.mipmap.ic_launcher;
     }
 

@@ -31,6 +31,12 @@ public class ApiEndpoints {
     public static final String CATEGORY_FETCH_ID="&category_id=";
 
     public static final String SEARCH_STORY_BY_TAG = "search/storyByTag";
+    public static final String TAG_URL = " http://50.112.57.146/api/search/storyByTag?user_id=95&tags=IoT";
+    public static final String TAG_STORY_BY_TAG = " search/storyByTag?user_id=";
+    public static final String TAG_NAME = "&tags=";
+
+
+
 
 
 }

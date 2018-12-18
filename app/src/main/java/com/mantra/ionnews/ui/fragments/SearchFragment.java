@@ -4,26 +4,21 @@ package com.mantra.ionnews.ui.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,14 +26,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mantra.ionnews.R;
-import com.mantra.ionnews.adapters.ProfileGridAdapter;
 import com.mantra.ionnews.adapters.SearchAdapter;
-import com.mantra.ionnews.datahandlers.CatagoryTagDataHandler;
-import com.mantra.ionnews.datahandlers.SearchByTagHandler;
-import com.mantra.ionnews.datahandlers.StoriesDataHandler;
 import com.mantra.ionnews.interfaces.BaseResponseInterface;
 import com.mantra.ionnews.interfaces.OnFragmentEventTagListener;
 import com.mantra.ionnews.interfaces.OnProfileGridItemClickListener;
@@ -50,18 +44,20 @@ import com.mantra.ionnews.models.responses.GetAllLikesResponse;
 import com.mantra.ionnews.models.responses.StoriesResponse;
 import com.mantra.ionnews.ui.activities.DashboardActivity;
 import com.mantra.ionnews.ui.activities.NewsDetailActivity;
-import com.mantra.ionnews.ui.activities.OnboardingActivity;
 import com.mantra.ionnews.ui.activities.SearchResultActivity;
-import com.mantra.ionnews.ui.customui.flipview.Recycler;
+import com.mantra.ionnews.ui.activities.TAGActivity;
+import com.mantra.ionnews.ui.customui.GridDividerDecoration;
 import com.mantra.ionnews.utils.LocalStorage;
-import com.mantra.ionnews.utils.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -73,10 +69,10 @@ import static com.mantra.ionnews.utils.AppConstants.KEY_CATEGORY_NAME;
 import static com.mantra.ionnews.utils.AppConstants.KEY_CATEGORY_STORIES;
 import static com.mantra.ionnews.utils.AppConstants.KEY_LIKED_STORIES;
 import static com.mantra.ionnews.utils.AppConstants.KEY_LIKED_STORY_INDEX;
+import static com.mantra.ionnews.utils.AppConstants.KEY_TAG_STORIES_PREF;
 import static com.mantra.ionnews.utils.AppConstants.KEY_USER_ID;
 import static com.mantra.ionnews.utils.ConstantClass.SEARCH;
 import static com.mantra.ionnews.utils.ConstantClass.STORIES_RESPONSE;
-
 
 
 public class SearchFragment extends BaseFragment implements OnFragmentEventTagListener, OnProfileGridItemClickListener, BaseResponseInterface, SearchView.OnQueryTextListener {
@@ -98,6 +94,9 @@ public class SearchFragment extends BaseFragment implements OnFragmentEventTagLi
     List<String> searchBoxStoryList = new ArrayList<>();
     ArrayAdapter<String> listAdapter = null;
     ListView listview;
+    private RecyclerView.LayoutManager profileGridLayoutManager;
+    private boolean isLikeView = false, isDecorationAdded = false;
+
 
     public SearchFragment() {
 
@@ -130,15 +129,15 @@ public class SearchFragment extends BaseFragment implements OnFragmentEventTagLi
         initView(layout);
         storiesResponseList = LocalStorage.getInstance(getContext()).getStories();
         searchAdapter = new SearchAdapter(storiesResponseList, null, this);
-        fetchCatagoryAndTAG();
+        setUpProfileGrid();
 
 
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+       /* RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(searchAdapter);
+        recyclerView.setAdapter(searchAdapter);*/
 
         storiesResponseList = LocalStorage.getInstance(getContext()).getStories();
         likesResponse = LocalStorage.getInstance(getContext()).getAllLikes();
@@ -185,15 +184,14 @@ public class SearchFragment extends BaseFragment implements OnFragmentEventTagLi
                     }
                 }
 
-
-
-
-
                 String item = ((TextView)view).getText().toString();
-                String myuserID = "95";
-                String itemId = "http://50.112.57.146/api/story/list?user_id="+myuserID+"&category_id="+pos;
-
-                Intent intent = new Intent(getActivity(), SearchResultActivity.class);
+                if(!item.isEmpty())
+                {
+                    String replaceString = item.replace("#","");
+                    fetchCatagoryAndTAG(LocalStorage.getInstance(getActivity()).getID(),replaceString);
+                }
+                else {
+                    Intent intent = new Intent(getActivity(), SearchResultActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt(KEY_USER_ID, Integer.parseInt(LocalStorage.getInstance(getContext()).getUserID()));
                 bundle.putString(KEY_CATEGORY_ID, String.valueOf(pos));
@@ -201,6 +199,7 @@ public class SearchFragment extends BaseFragment implements OnFragmentEventTagLi
                 intent.putExtras(bundle);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.slide_in_up, 0);
+                }
 
             }
         });
@@ -242,7 +241,8 @@ public class SearchFragment extends BaseFragment implements OnFragmentEventTagLi
                     String value= null;
                     try {
                         value = itemArray.getString(i);
-                        searchBoxStoryList.add(value);
+                        String replaceString = value.replace("#","");
+                        searchBoxStoryList.add(replaceString);
                         listview.setAdapter(listAdapter);
 
 
@@ -335,12 +335,8 @@ public class SearchFragment extends BaseFragment implements OnFragmentEventTagLi
 
 
     //fetchStoryTitles
-    public void fetchCatagoryAndTAG() {
-        CatagoryTagDataHandler catagoryTagDataHandler = new CatagoryTagDataHandler(this, getActivity());
-        if (Util.hasInternetAccess(getActivity())) {
-            catagoryTagDataHandler.request();
-
-        }
+    public void fetchCatagoryAndTAG(String keyUserId, String keyCategoryName) {
+        postTAG(getActivity(),keyUserId,keyCategoryName);
     }
 
 
@@ -363,6 +359,118 @@ public class SearchFragment extends BaseFragment implements OnFragmentEventTagLi
         return true;
 
 
+    }
+
+    public void postTAG(Context context, final  String ID ,final String tagName){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        final String URL = BASE_URL+"search/storyByTag?user_id="+ID+"&tags="+tagName;
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("token", LocalStorage.getInstance(getActivity()).getToken());
+
+        JsonObjectRequest request_json = new JsonObjectRequest(URL, new JSONObject(params),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "onResponse: "+response);
+
+                        JSONObject jsonObject= response.optJSONObject("data").optJSONObject("all_data");
+                        if(jsonObject!= null)
+                        {
+                            Gson gson = new Gson();
+                            List<StoriesResponse> storiesResponseList = new ArrayList<>();
+                            Iterator<?> keys = jsonObject.keys();
+
+                            while (keys.hasNext()) {
+                                String key = (String) keys.next();
+                                StoriesResponse storiesResponse = new StoriesResponse();
+                                storiesResponse.setCategoryTitle(key);
+                                if (jsonObject.optJSONArray(key) != null && jsonObject.optJSONArray(key).length() > 0) {
+                                    Type storyListType = new TypeToken<List<Story>>() {
+                                    }.getType();
+                                    List<Story> stories = gson.fromJson(jsonObject.optJSONArray(key).toString(), storyListType);
+                                    storiesResponse.setCategoryStories(stories);
+                                    storiesResponseList.add(storiesResponse);
+
+
+                                        Bundle storiesResponseBundle = new Bundle();
+                                        storiesResponseBundle.putSerializable(KEY_TAG_STORIES_PREF, storiesResponse);
+
+                                        Intent intent = new Intent(getActivity(), TAGActivity.class);
+                                        intent.putExtra(KEY_CATEGORY_NAME, storiesResponse.getCategoryTitle() + "");
+                                        intent.putExtra(KEY_CATEGORY_ID, storiesResponse.getCategoryStories().get(0).getCategoryId() + "");
+                                        intent.putExtra(KEY_CATEGORY_STORIES, storiesResponseBundle);
+                                        startActivity(intent);
+                                        getActivity().overridePendingTransition(R.anim.slide_in_up, 0);
+
+                                }
+                            }
+
+                            LocalStorage.getInstance(getContext()).setTagStories(gson.toJson(storiesResponseList));
+                        }
+                        else {
+                            Toast.makeText(getContext(),"No Result Found", Toast.LENGTH_SHORT).show();
+                        }
+
+                        }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+            }
+        });
+        queue.add(request_json);
+
+
+    }
+
+
+
+    //Grid View 2
+    private void setUpProfileGrid() {
+
+        profileGridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
+        if (isLikeView)
+            searchAdapter = new SearchAdapter(null, likesItemList, this);
+        else
+            searchAdapter = new SearchAdapter(storiesResponseList, null, this);
+        recyclerView.setLayoutManager(profileGridLayoutManager);
+        if (!isDecorationAdded) {
+            isDecorationAdded = true;
+            recyclerView.addItemDecoration(new GridDividerDecoration(getResources().getDimensionPixelSize(R.dimen.likes_item_margin), 2));
+        }
+        recyclerView.setAdapter(searchAdapter);
+    }
+    @Override
+    public void onResume() {
+
+        super.onResume();
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+
+                    fragmentTransaction();
+                    return true;
+                }
+
+                return false;
+            }
+        });
+    }
+
+
+    public void fragmentTransaction()
+    {
+        Fragment fragment = new BaseFragment();
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                android.R.anim.fade_out);
+        fragmentTransaction.replace(R.id.ad_fragment_container, fragment);
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
 

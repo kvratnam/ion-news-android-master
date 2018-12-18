@@ -1,13 +1,5 @@
 package com.mantra.ionnews.utils;
 
-import android.annotation.SuppressLint;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.widget.BottomNavigationView;
-import android.util.Log;
-
-import java.lang.reflect.Field;
-
 /**
  * Created by Shruthi.gr on 09-10-2018.
  */

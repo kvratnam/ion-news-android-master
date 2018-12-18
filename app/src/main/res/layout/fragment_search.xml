@@ -16,6 +16,17 @@
         android:background="@color/profileSubHeaderText"
         app:layout_editor_absoluteY="8dp" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listView"
+        app:layout_constraintTop_toBottomOf="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingBottom="55dp"
+        android:scrollbars="vertical"
+        />
+
+
     <ListView
         android:id="@+id/mobile_list"
         app:layout_constraintTop_toBottomOf="@+id/search"
@@ -25,14 +36,6 @@
     </ListView>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        app:layout_editor_absoluteX="8dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/search"
-
-        />
 
     <TextView
         android:id="@+id/no_stories"

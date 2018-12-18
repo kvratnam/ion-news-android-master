@@ -57,5 +57,5 @@ public class ConstantClass {
     public static final int[] ADS_FOOTER_MENU_OPTION_ICONS = {
             R.drawable.ic_view_on_web
     };
-    public static boolean IS_DEV = true;
+    public static boolean IS_DEV = false;
 }

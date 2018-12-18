@@ -19,6 +19,7 @@ import static com.mantra.ionnews.utils.AppConstants.KEY_SHARED_PREFS_CHANGE_IN_L
 import static com.mantra.ionnews.utils.AppConstants.KEY_SHARED_PREFS_STORIES;
 import static com.mantra.ionnews.utils.AppConstants.KEY_SHARED_PREFS_TOKEN;
 import static com.mantra.ionnews.utils.AppConstants.KEY_SHARED_PREFS_USER;
+import static com.mantra.ionnews.utils.AppConstants.KEY_TAG_STORIES_PREF;
 import static com.mantra.ionnews.utils.AppConstants.KEY_USER_ID;
 
 /**
@@ -145,4 +146,25 @@ public class LocalStorage {
         editor.commit();
     }
 
+
+    //Tag Stories
+
+    public List<StoriesResponse> getTagStories() {
+        if (sharedPreferences.contains(KEY_TAG_STORIES_PREF)) {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<StoriesResponse>>() {
+            }.getType();
+            List<StoriesResponse> stories = gson.fromJson(
+                    sharedPreferences.getString(KEY_TAG_STORIES_PREF, null), listType);
+            return stories;
+        } else return new ArrayList<>();
+    }
+
+
+
+    public void setTagStories(String stories) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_TAG_STORIES_PREF, stories);
+        editor.commit();
+    }
 }

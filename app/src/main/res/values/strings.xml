@@ -71,7 +71,7 @@
 
     <!--Bottom Navigation Items-->
     <string name="item_1">Home</string>
-    <string name="item_2">News</string>
+    <string name="item_2">List</string>
     <string name="item_3">Search</string>
     <string name="item_4">Profile</string>
     <string name="nav_settings">Settings</string>

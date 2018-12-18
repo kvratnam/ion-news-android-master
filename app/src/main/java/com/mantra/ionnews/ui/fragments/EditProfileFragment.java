@@ -10,9 +10,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.Editable;
 import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -207,7 +210,14 @@ public class EditProfileFragment extends BaseFragment
     public static OnProfileUpdateListener onProfileUpdateListener;
     @Override
     public void onDetach() {
-        onProfileUpdateListener.onProfileUpdated();
+        try{
+            onProfileUpdateListener.onProfileUpdated();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
         super.onDetach();
     }
 
@@ -216,7 +226,8 @@ public class EditProfileFragment extends BaseFragment
             @Override
             public void onClick(View v) {
                 Util.hideSoftKeyboard(getActivity());
-                getActivity().getSupportFragmentManager().popBackStack();
+              //  getActivity().getSupportFragmentManager().popBackStack();
+                fragmentTransaction();
             }
         });
 
@@ -243,18 +254,20 @@ public class EditProfileFragment extends BaseFragment
                 || !user.getRole().equals(newRole)) {
             initEditProfileRequest(newFirstName, newLastName, newOrganization, newDesignation, newMobileNum,selectedUserGroup, selectedUserGroupId);
         } else if (newProfileImg) {
-            showToastMessage(getString(R.string.saved), false);
+            showToastMessage(getActivity().getString(R.string.saved), false);
             Util.hideSoftKeyboard(getActivity());
-            getActivity().getSupportFragmentManager().popBackStack();
+         //   getActivity().getSupportFragmentManager().popBackStack();
+            fragmentTransaction();
         } else {
             noChangeInProfile();
         }
     }
 
     private void noChangeInProfile() {
-        showToastMessage(getString(R.string.no_change_in_profile), false);
+        showToastMessage(getActivity().getString(R.string.no_change_in_profile), false);
         Util.hideSoftKeyboard(getActivity());
-        getActivity().getSupportFragmentManager().popBackStack();
+      //  getActivity().getSupportFragmentManager().popBackStack();
+        fragmentTransaction();
     }
 
     private void initEditProfileRequest(String firstName, String lastName, String organization,
@@ -327,7 +340,7 @@ public class EditProfileFragment extends BaseFragment
         Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
         getIntent.setType("image/*");
 
-        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         pickIntent.setType("image/*");
 
         Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
@@ -491,4 +504,41 @@ public class EditProfileFragment extends BaseFragment
             getActivity().getSupportFragmentManager().popBackStack();
         }
     }
+
+
+    public void fragmentTransaction()
+    {
+        Fragment fragment = new BaseFragment();
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                android.R.anim.fade_out);
+        fragmentTransaction.replace(R.id.ad_fragment_container, fragment);
+        fragmentTransaction.commitAllowingStateLoss();
+    }
+
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+
+                    fragmentTransaction();
+                    return true;
+                }
+
+                return false;
+            }
+        });
+    }
+
+
+
 }

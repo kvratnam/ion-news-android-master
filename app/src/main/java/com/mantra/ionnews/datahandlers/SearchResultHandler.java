@@ -15,29 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import static com.mantra.ionnews.restclient.ApiEndpoints.CATEGORY_FETCH_ID;
-import static com.mantra.ionnews.restclient.ApiEndpoints.CATEGORY_FETCH_NEWS;
-import static com.mantra.ionnews.restclient.ApiEndpoints.CATEGORY_FETCH_NEWS_PAGE;
 import static com.mantra.ionnews.restclient.ApiEndpoints.STORY_LIST;
 import static com.mantra.ionnews.utils.AppConstants.BASE_URL;
-
-
-import android.content.Context;
-
-        import com.android.volley.Request;
-        import com.android.volley.VolleyError;
-        import com.google.gson.Gson;
-        import com.mantra.ionnews.interfaces.BaseResponseInterface;
-        import com.mantra.ionnews.models.responses.CategoryStoryResponse;
-        import com.mantra.ionnews.models.responses.Error;
-        import com.mantra.ionnews.restclient.HttpRequestHandler;
-        import com.mantra.ionnews.restclient.SuccessListener;
-
-        import org.json.JSONArray;
-        import org.json.JSONObject;
-
-        import static com.mantra.ionnews.restclient.ApiEndpoints.CATEGORY_FETCH_NEWS;
-        import static com.mantra.ionnews.restclient.ApiEndpoints.CATEGORY_FETCH_NEWS_PAGE;
-        import static com.mantra.ionnews.utils.AppConstants.BASE_URL;
 
 /**
  * Created by rajat on 30/03/17.

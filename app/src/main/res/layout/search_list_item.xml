@@ -6,7 +6,7 @@
     android:background="@drawable/ic_story_item_background">
 
     <ImageView
-        android:id="@+id/ipg_image"
+        android:id="@+id/ipg_image_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />

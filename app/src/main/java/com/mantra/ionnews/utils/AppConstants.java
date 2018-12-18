@@ -11,8 +11,12 @@ public class AppConstants {
     public static final String APP_NAME = "Ion News";
 
    // public static final String BASE_DEV_URL = "http://34.211.114.131/api/";
-    public static final String BASE_DEV_URL = "http://50.112.57.146/api/";
-    public static final String BASE_PROD_URL = "http://34.212.156.81/api/";
+   // public static final String BASE_DEV_URL = "https://50.112.57.146/api/";
+   //  public static final String BASE_PROD_URL = "https://34.212.156.81/api/";
+
+    public static final String BASE_DEV_URL = "http://dev.anionnews.com/api/";
+    public static final String BASE_PROD_URL = "https://www.anionnews.com/api/";
+
 
     public static final String BASE_URL = IS_DEV ? BASE_DEV_URL : BASE_PROD_URL;
 
@@ -70,6 +74,9 @@ public class AppConstants {
     public static final String KEY_USER_ID = "user_id";
     public static final String  KEY_TAG= "tags";
     public static final String  KEY_ID= "id";
+
+ public static final String KEY_TAG_STORIES_PREF = "category_stories";
+
 }
 
 

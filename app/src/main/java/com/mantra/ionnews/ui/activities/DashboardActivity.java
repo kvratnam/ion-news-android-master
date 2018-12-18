@@ -1,7 +1,6 @@
 package com.mantra.ionnews.ui.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,15 +13,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 
-import com.google.gson.JsonObject;
 import com.mantra.ionnews.R;
 import com.mantra.ionnews.adapters.ViewPagerAdapter;
-import com.mantra.ionnews.datahandlers.CatagoryTagDataHandler;
 import com.mantra.ionnews.datahandlers.SearchByTagHandler;
 import com.mantra.ionnews.datahandlers.StoriesDataHandler;
 import com.mantra.ionnews.interfaces.BaseResponseInterface;
@@ -33,18 +28,15 @@ import com.mantra.ionnews.models.FragmentState;
 import com.mantra.ionnews.models.responses.Error;
 import com.mantra.ionnews.ui.fragments.BaseFragment;
 import com.mantra.ionnews.ui.fragments.EditProfileFragment;
-import com.mantra.ionnews.ui.fragments.NewsFragment;
 import com.mantra.ionnews.ui.fragments.ProfileFragment;
 import com.mantra.ionnews.ui.fragments.SearchFragment;
 import com.mantra.ionnews.ui.fragments.SettingsFragment;
-import com.mantra.ionnews.ui.fragments.StoriesFragment;
 import com.mantra.ionnews.utils.LocalStorage;
 import com.mantra.ionnews.utils.Util;
 
 import org.json.JSONObject;
 
 import java.lang.reflect.Field;
-import java.util.logging.Logger;
 
 import de.greenrobot.event.EventBus;
 
@@ -56,7 +48,6 @@ import static com.mantra.ionnews.utils.ConstantClass.PROFILE;
 import static com.mantra.ionnews.utils.ConstantClass.SETTINGS;
 import static com.mantra.ionnews.utils.ConstantClass.STORIES_RESPONSE;
 import static com.mantra.ionnews.utils.ConstantClass.WITH_LIKES;
-import static com.mantra.ionnews.utils.ConstantClass.SEARCH;
 
 /**
  * Created by rajat on 17/03/17.

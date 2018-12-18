@@ -9,7 +9,6 @@ import static com.mantra.ionnews.utils.AppConstants.KEY_DEVICE_TYPE;
 import static com.mantra.ionnews.utils.AppConstants.KEY_EMAIL;
 import static com.mantra.ionnews.utils.AppConstants.KEY_FIRST_NAME;
 import static com.mantra.ionnews.utils.AppConstants.KEY_LAST_NAME;
-import static com.mantra.ionnews.utils.AppConstants.KEY_MOBILE;
 import static com.mantra.ionnews.utils.AppConstants.KEY_ORGANIZATION;
 import static com.mantra.ionnews.utils.AppConstants.KEY_PASSWORD;
 import static com.mantra.ionnews.utils.AppConstants.KEY_PHONE;

@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import com.google.gson.Gson;
 import com.mantra.ionnews.R;
 import com.mantra.ionnews.adapters.FlipAdapter;
-import com.mantra.ionnews.datahandlers.CategoryStoryDataHandler;
 import com.mantra.ionnews.datahandlers.LikeStoryDataHandler;
 import com.mantra.ionnews.datahandlers.SearchResultHandler;
 import com.mantra.ionnews.interfaces.BaseResponseInterface;
@@ -22,7 +21,6 @@ import com.mantra.ionnews.models.Story;
 import com.mantra.ionnews.models.requests.LikeStoryRequest;
 import com.mantra.ionnews.models.responses.CategoryStoryResponse;
 import com.mantra.ionnews.models.responses.Error;
-import com.mantra.ionnews.models.responses.StoriesResponse;
 import com.mantra.ionnews.ui.customui.flipview.FlipView;
 import com.mantra.ionnews.ui.dialogs.NewsFooterMenuBottomSheetDialog;
 import com.mantra.ionnews.ui.dialogs.NewsPopupDialogs;
@@ -38,53 +36,8 @@ import java.util.List;
 
 import static com.mantra.ionnews.utils.AppConstants.KEY_CATEGORY_ID;
 import static com.mantra.ionnews.utils.AppConstants.KEY_CATEGORY_NAME;
-import static com.mantra.ionnews.utils.AppConstants.KEY_CATEGORY_STORIES;
-import static com.mantra.ionnews.utils.AppConstants.KEY_LIKED_STORIES;
-import static com.mantra.ionnews.utils.AppConstants.KEY_LIKED_STORY_INDEX;
 import static com.mantra.ionnews.utils.AppConstants.KEY_STORY_ITEM;
 import static com.mantra.ionnews.utils.ConstantClass.NEWS_DETAIL;
-
-
-import android.content.Intent;
-        import android.os.Bundle;
-        import android.support.annotation.Nullable;
-        import android.support.design.widget.BottomSheetDialogFragment;
-        import android.view.View;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-
-        import com.google.gson.Gson;
-        import com.mantra.ionnews.R;
-        import com.mantra.ionnews.adapters.FlipAdapter;
-        import com.mantra.ionnews.datahandlers.CategoryStoryDataHandler;
-        import com.mantra.ionnews.datahandlers.LikeStoryDataHandler;
-        import com.mantra.ionnews.interfaces.BaseResponseInterface;
-        import com.mantra.ionnews.interfaces.OnLikeStoryResponseListener;
-        import com.mantra.ionnews.interfaces.OnNewsFlipItemClickListener;
-        import com.mantra.ionnews.interfaces.OnPopupDialogClickListener;
-        import com.mantra.ionnews.models.Story;
-        import com.mantra.ionnews.models.requests.LikeStoryRequest;
-        import com.mantra.ionnews.models.responses.Error;
-        import com.mantra.ionnews.models.responses.StoriesResponse;
-        import com.mantra.ionnews.ui.customui.flipview.FlipView;
-        import com.mantra.ionnews.ui.dialogs.NewsFooterMenuBottomSheetDialog;
-        import com.mantra.ionnews.ui.dialogs.NewsPopupDialogs;
-        import com.mantra.ionnews.utils.CustomShareIntent;
-        import com.mantra.ionnews.utils.Util;
-
-        import org.json.JSONException;
-        import org.json.JSONObject;
-
-        import java.util.ArrayList;
-        import java.util.List;
-
-        import static com.mantra.ionnews.utils.AppConstants.KEY_CATEGORY_ID;
-        import static com.mantra.ionnews.utils.AppConstants.KEY_CATEGORY_NAME;
-        import static com.mantra.ionnews.utils.AppConstants.KEY_CATEGORY_STORIES;
-        import static com.mantra.ionnews.utils.AppConstants.KEY_LIKED_STORIES;
-        import static com.mantra.ionnews.utils.AppConstants.KEY_LIKED_STORY_INDEX;
-        import static com.mantra.ionnews.utils.AppConstants.KEY_STORY_ITEM;
-        import static com.mantra.ionnews.utils.ConstantClass.NEWS_DETAIL;
 
 /**
  * Created by rajat on 30/03/17.

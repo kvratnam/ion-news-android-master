@@ -95,13 +95,20 @@ public class ProfileFragment extends BaseFragment
     private Target target = new Target() {
         @Override
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-            Bitmap circularBitmap = Util.getCircularBitmap(bitmap);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                tvProfile.setBackground(new BitmapDrawable(getContext().getResources(), circularBitmap));
-            } else {
-                tvProfile.setBackgroundDrawable(new BitmapDrawable(getContext().getResources(), circularBitmap));
+            try{
+           Bitmap circularBitmap = Util.getCircularBitmap(bitmap);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    tvProfile.setBackground(new BitmapDrawable(getContext().getResources(), circularBitmap));
+                } else {
+                    tvProfile.setBackgroundDrawable(new BitmapDrawable(getContext().getResources(), circularBitmap));
+                }
+                tvProfile.setText("");
             }
-            tvProfile.setText("");
+            catch (Exception e)
+            {
+
+            }
+
         }
 
         @Override
@@ -138,27 +145,32 @@ public class ProfileFragment extends BaseFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_profile, container, false);
+    try{
+    registerEventBus();
+    user = LocalStorage.getInstance(getContext()).getUser();
+    EditProfileFragment.onProfileUpdateListener = this;
 
-        registerEventBus();
+    initView(layout);
+    updateFragment();
 
-        user = LocalStorage.getInstance(getContext()).getUser();
-        EditProfileFragment.onProfileUpdateListener = this;
+    storiesResponseList = LocalStorage.getInstance(getContext()).getStories();
+    likesResponse = LocalStorage.getInstance(getContext()).getAllLikes();
+    if (likesResponse != null) {
+        likesItemList = likesResponse.getData();
+        setLikesCount(likesResponse.getTotal());
+    }
 
-        initView(layout);
-        updateFragment();
+    fetchAllLikes(-1, false);
 
-        storiesResponseList = LocalStorage.getInstance(getContext()).getStories();
-        likesResponse = LocalStorage.getInstance(getContext()).getAllLikes();
-        if (likesResponse != null) {
-            likesItemList = likesResponse.getData();
-            setLikesCount(likesResponse.getTotal());
-        }
+    setUpHeader();
+    setUpSubHeader();
+    setUpProfileGrid();
 
-        fetchAllLikes(-1, false);
-
-        setUpHeader();
-        setUpSubHeader();
-        setUpProfileGrid();
+    }
+    catch (Exception e)
+   {
+    e.printStackTrace();
+    }
 
         return layout;
     }
@@ -193,19 +205,24 @@ public class ProfileFragment extends BaseFragment
     }
 
     private void setUpProfileGrid() {
-        updateSubHeaderDetails();
+        try {
+            updateSubHeaderDetails();
 
-        profileGridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
-        if (isLikeView)
-            profileGridAdapter = new ProfileGridAdapter(null, likesItemList, this);
-        else
-            profileGridAdapter = new ProfileGridAdapter(storiesResponseList, null, this);
-        profileGridRv.setLayoutManager(profileGridLayoutManager);
-        if (!isDecorationAdded) {
-            isDecorationAdded = true;
-            profileGridRv.addItemDecoration(new GridDividerDecoration(getResources().getDimensionPixelSize(R.dimen.likes_item_margin), 2));
+            profileGridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
+            if (isLikeView)
+                profileGridAdapter = new ProfileGridAdapter(null, likesItemList, this);
+            else
+                profileGridAdapter = new ProfileGridAdapter(storiesResponseList, null, this);
+            profileGridRv.setLayoutManager(profileGridLayoutManager);
+            if (!isDecorationAdded) {
+                isDecorationAdded = true;
+                profileGridRv.addItemDecoration(new GridDividerDecoration(getResources().getDimensionPixelSize(R.dimen.likes_item_margin), 2));
+            }
+            profileGridRv.setAdapter(profileGridAdapter);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
         }
-        profileGridRv.setAdapter(profileGridAdapter);
     }
 
     private void updateSubHeaderDetails() {
@@ -444,13 +461,21 @@ public class ProfileFragment extends BaseFragment
 
     public void onEvent(DashboardRequest dashboardRequest) {
         Log.d(TAG, dashboardRequest.getStoriesResponse());
-        if (dashboardRequest.getStoriesResponse().equals(STORIES_RESPONSE)) {
+        try {
+
+            if (dashboardRequest.getStoriesResponse().equals(STORIES_RESPONSE)) {
             if (refreshLayout != null) refreshLayout.setRefreshing(false);
             storiesResponseList = LocalStorage.getInstance(getContext()).getStories();
             if (!isLikeView)
-                profileGridAdapter.notifyDataSetChanged();
-            setUpProfileGrid();
-            setStoriesCount(storiesResponseList.size());
+                    profileGridAdapter.notifyDataSetChanged();
+                    setUpProfileGrid();
+                    setStoriesCount(storiesResponseList.size());
+                }
+
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
