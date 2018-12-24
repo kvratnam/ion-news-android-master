@@ -19,20 +19,47 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+       >
+
+        <activity
+            android:name=".ui.activities.SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
+        <activity
+            android:name=".ui.activities.LoginActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+             />
+
+
+        <activity
+            android:name=".ui.activities.SignupActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+
 
         <activity
             android:name=".ui.activities.OnboardingActivity"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:windowSoftInputMode="adjustNothing" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".ui.activities.DashboardActivity"

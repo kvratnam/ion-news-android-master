@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.mantra.ionnews.R;
 import com.mantra.ionnews.models.FragmentState;
+import com.mantra.ionnews.ui.activities.LoginActivity;
 import com.mantra.ionnews.ui.activities.OnboardingActivity;
 import com.mantra.ionnews.utils.LocalStorage;
 
@@ -124,7 +125,7 @@ public class SettingsFragment extends BaseFragment {
 
     private void onLogoutClick() {
         LocalStorage.getInstance(getContext()).clearLocalStorage();
-        Intent i = new Intent(getContext(), OnboardingActivity.class);
+        Intent i = new Intent(getContext(), LoginActivity.class);
         startActivity(i);
         getActivity().finish();
     }

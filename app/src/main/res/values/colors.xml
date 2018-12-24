@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#5D4393</color>
 
-    <color name="colorAccentDark">#4A3575</color>
+    <color name="colorAccentDark">#6C2AB1</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
@@ -34,4 +34,8 @@
 
     <color name="settingsGradientBottom">#F2F2F2</color>
     <color name="settingsGradientUp">#DDDDDD</color>
+
+
+    <color name="colorButton">#ee0290</color>
+
 </resources>

@@ -47,6 +47,8 @@ public class Util {
 
     }
 
+
+
     public static int getToolbarHeight(Context context) {
         final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(
                 new int[]{R.attr.actionBarSize});

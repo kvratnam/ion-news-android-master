@@ -8,6 +8,7 @@
     <string name="log_in">Log In</string>
     <string name="sign_up">Sign up</string>
     <string name="email">Email</string>
+    <string name="enter_email">Enter Email ID</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="password">Password</string>
@@ -18,6 +19,7 @@
     <string name="forgot_password_button">Forgot Password?</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="next">Next</string>
+    <string name="submit">Submit</string>
     <string name="forgot_password_check_mail_alert">Instructions on how to reset your password were sent to your email!</string>
     <string name="user_group">Role</string>
 
