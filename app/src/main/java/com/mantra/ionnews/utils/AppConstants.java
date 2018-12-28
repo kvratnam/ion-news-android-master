@@ -75,6 +75,9 @@ public class AppConstants {
     public static final String  KEY_TAG= "tags";
     public static final String  KEY_ID= "id";
 
+    public static final String  KEY_COMPANY_IMAGE_URL= "COMPANY_IMAGE_URL";
+
+
  public static final String KEY_TAG_STORIES_PREF = "category_stories";
 
 }

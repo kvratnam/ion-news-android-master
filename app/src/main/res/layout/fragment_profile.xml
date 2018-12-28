@@ -43,7 +43,46 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+
+
+                <android.support.v7.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:id="@+id/toolbar"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        android:id="@+id/header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/favourite"
+                        android:textAllCaps="true"
+                        android:cursorVisible="false"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
+                        android:background="@drawable/header"
+                        android:gravity="center"
+                        android:editable="false"
+                        android:inputType="none"
+                        />
+
+                </android.support.v7.widget.Toolbar>
+
                 <include layout="@layout/header_sub_profile" android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/empty_view"
+                    android:layout_width="match_parent"
+                    android:layout_margin="20dp"
+                    android:layout_height="250dp"
+                    android:backgroundTint="@color/grayDark"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="150dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:background="@drawable/ic_accent_button"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/favourite_empty_list" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/fp_likes_rv"
@@ -52,6 +91,10 @@
                     android:layout_marginTop="@dimen/activity_margin_half"
                     android:layout_marginBottom="60dp"
                     android:nestedScrollingEnabled="false" />
+
+
+
+
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>

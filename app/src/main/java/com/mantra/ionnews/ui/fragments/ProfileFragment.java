@@ -38,7 +38,6 @@ import com.mantra.ionnews.models.responses.Error;
 import com.mantra.ionnews.models.responses.GetAllLikesResponse;
 import com.mantra.ionnews.models.responses.StoriesResponse;
 import com.mantra.ionnews.ui.activities.DashboardActivity;
-import com.mantra.ionnews.ui.activities.NewsDetailActivity;
 import com.mantra.ionnews.ui.customui.GridDividerDecoration;
 import com.mantra.ionnews.utils.LocalStorage;
 import com.mantra.ionnews.utils.Util;
@@ -91,6 +90,8 @@ public class ProfileFragment extends BaseFragment
 
     private RecyclerView.Adapter profileGridAdapter;
     private RecyclerView.LayoutManager profileGridLayoutManager;
+
+    TextView textViewNoFavouriteList;
 
     private Target target = new Target() {
         @Override
@@ -353,6 +354,18 @@ public class ProfileFragment extends BaseFragment
         profileGridRv = (RecyclerView) rootView.findViewById(R.id.fp_likes_rv);
         refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.fp_swipe_refresh_layout);
 
+        textViewNoFavouriteList = (TextView) rootView.findViewById(R.id.empty_view);
+
+       /* if (likesResponse.getTotal() > 0)
+        {
+            profileGridRv.setVisibility(View.GONE);
+            textViewNoFavouriteList.setVisibility(View.VISIBLE);
+        }
+        else {
+            profileGridRv.setVisibility(View.VISIBLE);
+            textViewNoFavouriteList.setVisibility(View.GONE);
+        }
+*/
         Typeface subHeaderTypeface = Typeface.createFromAsset(getContext().getAssets(), "ChronicaPro-Medium.ttf");
         tvLikes.setTypeface(subHeaderTypeface);
         tvStories.setTypeface(subHeaderTypeface);
@@ -412,15 +425,25 @@ public class ProfileFragment extends BaseFragment
     public void onProfileGridItemClick(View view, boolean isLikeItem) {
         int position = profileGridRv.getChildAdapterPosition(view);
         if (isLikeItem) {
-            Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+           /* Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable(KEY_LIKED_STORIES, (Serializable) likesItemList);
             bundle.putInt(KEY_LIKED_STORY_INDEX, position);
             intent.putExtra(KEY_LIKED_STORIES, bundle);
             startActivity(intent);
-            getActivity().overridePendingTransition(R.anim.slide_in_up, 0);
+            getActivity().overridePendingTransition(R.anim.slide_in_up, 0);*/
+
+
+            NewsdetailsFragment ldf = new NewsdetailsFragment ();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(KEY_LIKED_STORIES, (Serializable) likesItemList);
+            bundle.putInt(KEY_LIKED_STORY_INDEX, position);
+            ldf.setArguments(bundle);
+            getFragmentManager().beginTransaction().add(R.id.ad_fragment_container, ldf).commit();
+
+
         } else {
-            Bundle storiesResponseBundle = new Bundle();
+           /* Bundle storiesResponseBundle = new Bundle();
             storiesResponseBundle.putSerializable(KEY_CATEGORY_STORIES, storiesResponseList.get(position));
 
             Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
@@ -428,7 +451,15 @@ public class ProfileFragment extends BaseFragment
             intent.putExtra(KEY_CATEGORY_ID, storiesResponseList.get(position).getCategoryStories().get(0).getCategoryId() + "");
             intent.putExtra(KEY_CATEGORY_STORIES, storiesResponseBundle);
             startActivity(intent);
-            getActivity().overridePendingTransition(R.anim.slide_in_up, 0);
+            getActivity().overridePendingTransition(R.anim.slide_in_up, 0);*/
+
+            NewsdetailsFragment ldf = new NewsdetailsFragment ();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(KEY_CATEGORY_STORIES, storiesResponseList.get(position));
+            bundle.putSerializable(KEY_CATEGORY_NAME,storiesResponseList.get(position).getCategoryTitle() + "");
+            bundle.putString(KEY_CATEGORY_ID,storiesResponseList.get(position).getCategoryStories().get(0).getCategoryId() + "");
+            ldf.setArguments(bundle);
+            getFragmentManager().beginTransaction().add(R.id.ad_fragment_container, ldf).commit();
         }
     }
 
@@ -447,6 +478,16 @@ public class ProfileFragment extends BaseFragment
 
             setUpProfileGrid();
             setLikesCount(likesResponse.getTotal());
+
+            if(likesResponse.getTotal().toString().equals("0"))
+            {
+                profileGridRv.setVisibility(View.GONE);
+                textViewNoFavouriteList.setVisibility(View.VISIBLE);
+            }
+            else {
+                profileGridRv.setVisibility(View.VISIBLE);
+                textViewNoFavouriteList.setVisibility(View.GONE);
+            }
 
             if (likesResponse.getCurrentPage() != likesResponse.getLastPage() && likesResponse.getLastPage() != 0) {
                 fetchAllLikes(likesResponse.getCurrentPage() + 1, false);

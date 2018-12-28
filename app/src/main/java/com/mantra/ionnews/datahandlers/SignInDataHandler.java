@@ -53,6 +53,8 @@ public class SignInDataHandler implements SuccessListener {
         localStorage.setToken(signInResponse.getToken());
         localStorage.setUserID(signInResponse.getRoleID());
         localStorage.setID(String.valueOf(signInResponse.getId()));
+       // localStorage.setCompanyImageUrl(signInResponse.getCompanyImageUrl());
+        localStorage.setCompanyImageUrl("http://i.imgur.com/DvpvklR.png");
         baseResponseInterface.response(signInResponse, null);
     }
 

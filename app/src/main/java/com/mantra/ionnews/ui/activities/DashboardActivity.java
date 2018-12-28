@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SearchView;
 
 import com.mantra.ionnews.R;
@@ -41,7 +42,9 @@ import com.mantra.ionnews.ui.fragments.ProfileFragment;
 import com.mantra.ionnews.ui.fragments.SearchFragment;
 import com.mantra.ionnews.ui.fragments.SettingsFragment;
 import com.mantra.ionnews.utils.LocalStorage;
+import com.mantra.ionnews.utils.PicasoImageLoader;
 import com.mantra.ionnews.utils.Util;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -73,6 +76,7 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
     private boolean doubleBackToExitPressedOnce;
 
     public static BottomNavigationView bottomNavigationView;
+    private ImageView imageViewCompanyLogo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -151,6 +155,10 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
     private void initView() {
         viewPager = (ViewPager) findViewById(R.id.ad_view_pager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        imageViewCompanyLogo = (ImageView) findViewById(R.id.company_logo);
+        PicasoImageLoader.with(DashboardActivity.this)
+                .load(LocalStorage.getInstance(DashboardActivity.this).getCompanyImageUrl())
+                .into(imageViewCompanyLogo);
     }
 
     protected void registerEventBus() {
@@ -289,10 +297,5 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
             }
 
         }
-
-    public static float dipToPixels(Context context, float dipValue){
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,  dipValue, metrics);
-    }
 
 }

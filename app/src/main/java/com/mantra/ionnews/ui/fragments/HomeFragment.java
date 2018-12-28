@@ -404,23 +404,44 @@ public class HomeFragment extends BaseFragment
     public void onProfileGridItemClick(View view, boolean isLikeItem) {
         int position = profileGridRv.getChildAdapterPosition(view);
         if (isLikeItem) {
-            Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+            /*Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable(KEY_LIKED_STORIES, (Serializable) likesItemList);
             bundle.putInt(KEY_LIKED_STORY_INDEX, position);
             intent.putExtra(KEY_LIKED_STORIES, bundle);
             startActivity(intent);
-            getActivity().overridePendingTransition(R.anim.slide_in_up, 0);
-        } else {
-            Bundle storiesResponseBundle = new Bundle();
-            storiesResponseBundle.putSerializable(KEY_CATEGORY_STORIES, storiesResponseList.get(position));
+            getActivity().overridePendingTransition(R.anim.slide_in_up, 0);*/
 
+            NewsdetailsFragment ldf = new NewsdetailsFragment ();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(KEY_LIKED_STORIES, (Serializable) likesItemList);
+            bundle.putInt(KEY_LIKED_STORY_INDEX, position);
+            ldf.setArguments(bundle);
+            getFragmentManager().beginTransaction().add(R.id.ad_fragment_container, ldf).commit();
+
+
+        } else {
+            /*Bundle storiesResponseBundle = new Bundle();
+            storiesResponseBundle.putSerializable(KEY_CATEGORY_STORIES, storiesResponseList.get(position));
             Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
             intent.putExtra(KEY_CATEGORY_NAME, storiesResponseList.get(position).getCategoryTitle() + "");
             intent.putExtra(KEY_CATEGORY_ID, storiesResponseList.get(position).getCategoryStories().get(0).getCategoryId() + "");
             intent.putExtra(KEY_CATEGORY_STORIES, storiesResponseBundle);
             startActivity(intent);
-            getActivity().overridePendingTransition(R.anim.slide_in_up, 0);
+            getActivity().overridePendingTransition(R.anim.slide_in_up, 0);*/
+
+
+
+            NewsdetailsFragment ldf = new NewsdetailsFragment ();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(KEY_CATEGORY_STORIES, storiesResponseList.get(position));
+            bundle.putSerializable(KEY_CATEGORY_NAME,storiesResponseList.get(position).getCategoryTitle() + "");
+            bundle.putString(KEY_CATEGORY_ID,storiesResponseList.get(position).getCategoryStories().get(0).getCategoryId() + "");
+            ldf.setArguments(bundle);
+            getFragmentManager().beginTransaction().add(R.id.ad_fragment_container, ldf).commit();
+
+
+
         }
     }
 

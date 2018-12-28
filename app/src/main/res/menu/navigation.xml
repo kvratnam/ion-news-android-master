@@ -6,7 +6,7 @@
         android:title=""/>
     <item
         android:id="@+id/action_item2"
-        android:icon="@drawable/list"
+        android:icon="@drawable/ic_unlike"
         android:title=""/>
     <item
         android:id="@+id/action_item3"

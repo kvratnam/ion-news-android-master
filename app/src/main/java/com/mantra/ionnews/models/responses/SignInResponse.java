@@ -58,6 +58,19 @@ public class SignInResponse {
     @Expose
     private String roleID;
 
+
+    public String getCompanyImageUrl() {
+        return companyImageUrl;
+    }
+
+    public void setCompanyImageUrl(String companyImageUrl) {
+        this.companyImageUrl = companyImageUrl;
+    }
+
+    @SerializedName("company_image_url")
+    @Expose
+    private String companyImageUrl;
+
     public Integer getId() {
         return id;
     }

@@ -13,6 +13,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mantra.ionnews.utils.AppConstants.KEY_COMPANY_IMAGE_URL;
 import static com.mantra.ionnews.utils.AppConstants.KEY_ID;
 import static com.mantra.ionnews.utils.AppConstants.KEY_SHARED_PREFS_ALL_LIKES;
 import static com.mantra.ionnews.utils.AppConstants.KEY_SHARED_PREFS_CHANGE_IN_LIKES;
@@ -167,4 +168,21 @@ public class LocalStorage {
         editor.putString(KEY_TAG_STORIES_PREF, stories);
         editor.commit();
     }
+
+
+
+
+    public String getCompanyImageUrl() {
+        if (sharedPreferences.contains(KEY_COMPANY_IMAGE_URL))
+            return sharedPreferences.getString(KEY_COMPANY_IMAGE_URL, null);
+        else return null;
+    }
+
+    public void setCompanyImageUrl(String companyImageUrl) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_COMPANY_IMAGE_URL, companyImageUrl);
+        editor.commit();
+    }
+
+
 }
