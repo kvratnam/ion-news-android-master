@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -56,7 +57,9 @@ import static com.mantra.ionnews.utils.AppConstants.KEY_CATEGORY_NAME;
 import static com.mantra.ionnews.utils.AppConstants.KEY_CATEGORY_STORIES;
 import static com.mantra.ionnews.utils.AppConstants.KEY_LIKED_STORIES;
 import static com.mantra.ionnews.utils.AppConstants.KEY_LIKED_STORY_INDEX;
+import static com.mantra.ionnews.utils.ConstantClass.DASHBOARD;
 import static com.mantra.ionnews.utils.ConstantClass.EDIT_PROFILE;
+import static com.mantra.ionnews.utils.ConstantClass.NEWDETAILS;
 import static com.mantra.ionnews.utils.ConstantClass.ON_GOTO_NEWS_FRAGMENT;
 import static com.mantra.ionnews.utils.ConstantClass.PROFILE;
 import static com.mantra.ionnews.utils.ConstantClass.SETTINGS;
@@ -439,7 +442,11 @@ public class ProfileFragment extends BaseFragment
             bundle.putSerializable(KEY_LIKED_STORIES, (Serializable) likesItemList);
             bundle.putInt(KEY_LIKED_STORY_INDEX, position);
             ldf.setArguments(bundle);
-            getFragmentManager().beginTransaction().add(R.id.ad_fragment_container, ldf).commit();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                    android.R.anim.fade_out);
+            fragmentTransaction.replace(R.id.ad_fragment_container, ldf);
+            fragmentTransaction.commitAllowingStateLoss();
 
 
         } else {
@@ -459,7 +466,11 @@ public class ProfileFragment extends BaseFragment
             bundle.putSerializable(KEY_CATEGORY_NAME,storiesResponseList.get(position).getCategoryTitle() + "");
             bundle.putString(KEY_CATEGORY_ID,storiesResponseList.get(position).getCategoryStories().get(0).getCategoryId() + "");
             ldf.setArguments(bundle);
-            getFragmentManager().beginTransaction().add(R.id.ad_fragment_container, ldf).commit();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                    android.R.anim.fade_out);
+            fragmentTransaction.replace(R.id.ad_fragment_container, ldf);
+            fragmentTransaction.commitAllowingStateLoss();
         }
     }
 

@@ -130,6 +130,19 @@ public class NewsdetailsFragment extends BaseFragment
         mainView = (LinearLayout) view.findViewById(R.id.and_main_view);
     }
 
+
+    public NewsdetailsFragment() {
+
+    }
+
+    public static NewsdetailsFragment newInstance() {
+        NewsdetailsFragment fragment = new NewsdetailsFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
     @Override
     public void response(Object response, Error error) {
        // hideProgressDialog();
@@ -247,8 +260,8 @@ public class NewsdetailsFragment extends BaseFragment
 
     @Override
     public void onBackClick() {
-       /* finish();
-        overridePendingTransition(0, R.anim.slide_out_down);*/
+        getActivity().finish();
+        getActivity().overridePendingTransition(0, R.anim.slide_out_down);
     }
 
 
@@ -345,4 +358,7 @@ public class NewsdetailsFragment extends BaseFragment
         fragmentTransaction.replace(R.id.ad_fragment_container, fragment);
         fragmentTransaction.commitAllowingStateLoss();
     }
+
+
 }
+

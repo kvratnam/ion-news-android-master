@@ -55,6 +55,7 @@ import de.greenrobot.event.EventBus;
 import static com.mantra.ionnews.utils.ConstantClass.DASHBOARD;
 import static com.mantra.ionnews.utils.ConstantClass.EDIT_PROFILE;
 import static com.mantra.ionnews.utils.ConstantClass.HOME;
+import static com.mantra.ionnews.utils.ConstantClass.NEWDETAILS;
 import static com.mantra.ionnews.utils.ConstantClass.ON_GOTO_NEWS_FRAGMENT;
 import static com.mantra.ionnews.utils.ConstantClass.ON_GOTO_PROFILE_FRAGMENT;
 import static com.mantra.ionnews.utils.ConstantClass.PROFILE;
@@ -77,7 +78,7 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
 
     public static BottomNavigationView bottomNavigationView;
     private ImageView imageViewCompanyLogo;
-
+    BottomNavigationMenuView bottomNavigationMenuView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,9 +94,9 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
         disableShiftMode(bottomNavigationView);
 
 
-        BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);;
-        for (int i = 0; i < menuView.getChildCount(); i++) {
-            final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
+        bottomNavigationMenuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);;
+        for (int i = 0; i < bottomNavigationMenuView.getChildCount(); i++) {
+            final View iconView = bottomNavigationMenuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
             final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
             final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
             layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
@@ -116,7 +117,8 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
                                 fragment = new HomeFragment();
                                 break;
                             case R.id.action_item2:
-                                fragment = new ProfileFragment();
+                               // fragment = new ProfileFragment();
+                                openThisFragment(PROFILE);
                                 break;
                             case R.id.action_item3:
                               //  fragment=new SearchFragment();
@@ -230,7 +232,16 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
                     .replace(R.id.ad_fragment_container, EditProfileFragment.newInstance(), EDIT_PROFILE)
                     .addToBackStack(DASHBOARD)
                     .commit();
-        } else {
+        }
+        else if (fragmentTag.equals(PROFILE)) {
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
+                    .replace(R.id.ad_fragment_container, ProfileFragment.newInstance(), PROFILE)
+                    .addToBackStack(DASHBOARD)
+                    .commit();
+        }
+
+        else {
             Log.e(TAG, "Fragment error!");
         }
     }
@@ -240,6 +251,8 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
         Log.d(TAG, "getBackStackEntryCount: " + getSupportFragmentManager().getBackStackEntryCount());
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
+            bottomNavigationView.getMenu().findItem(R.id.action_item1).setChecked(true);
+
         } else {
 //            if (doubleBackToExitPressedOnce) {
             super.onBackPressed();

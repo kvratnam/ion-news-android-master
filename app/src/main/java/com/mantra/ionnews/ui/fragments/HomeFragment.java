@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -417,7 +418,13 @@ public class HomeFragment extends BaseFragment
             bundle.putSerializable(KEY_LIKED_STORIES, (Serializable) likesItemList);
             bundle.putInt(KEY_LIKED_STORY_INDEX, position);
             ldf.setArguments(bundle);
-            getFragmentManager().beginTransaction().add(R.id.ad_fragment_container, ldf).commit();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                    android.R.anim.fade_out);
+            fragmentTransaction.replace(R.id.ad_fragment_container, ldf);
+            fragmentTransaction.commitAllowingStateLoss();
+
+
 
 
         } else {
@@ -438,7 +445,11 @@ public class HomeFragment extends BaseFragment
             bundle.putSerializable(KEY_CATEGORY_NAME,storiesResponseList.get(position).getCategoryTitle() + "");
             bundle.putString(KEY_CATEGORY_ID,storiesResponseList.get(position).getCategoryStories().get(0).getCategoryId() + "");
             ldf.setArguments(bundle);
-            getFragmentManager().beginTransaction().add(R.id.ad_fragment_container, ldf).commit();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                    android.R.anim.fade_out);
+            fragmentTransaction.replace(R.id.ad_fragment_container, ldf);
+            fragmentTransaction.commitAllowingStateLoss();
 
 
 

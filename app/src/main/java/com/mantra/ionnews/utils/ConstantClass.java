@@ -24,6 +24,7 @@ public class ConstantClass {
     public static final String SETTINGS = "SETTINGS";
     public static final String EDIT_PROFILE = "EDIT_PROFILE";
     public static final String SEARCH = "SEARCH";
+    public static final String NEWDETAILS = "NEWDETAILS";
 
     // BottomSheets
     public static final String SIGN_IN = "SIGN_IN";

@@ -144,7 +144,7 @@ public class SettingsFragment extends BaseFragment {
     }
 
 
-    @Override
+    /*@Override
     public void onResume() {
 
         super.onResume();
@@ -164,7 +164,7 @@ public class SettingsFragment extends BaseFragment {
                 return false;
             }
         });
-    }
+    }*/
 
 
 }

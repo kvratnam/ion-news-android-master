@@ -517,7 +517,7 @@ public class EditProfileFragment extends BaseFragment
     }
 
 
-    @Override
+    /*@Override
     public void onResume() {
 
         super.onResume();
@@ -538,7 +538,7 @@ public class EditProfileFragment extends BaseFragment
             }
         });
     }
-
+*/
 
 
 }
