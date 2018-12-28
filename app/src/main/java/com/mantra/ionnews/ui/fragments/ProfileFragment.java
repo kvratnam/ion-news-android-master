@@ -208,7 +208,7 @@ public class ProfileFragment extends BaseFragment
         try {
             updateSubHeaderDetails();
 
-            profileGridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
+            profileGridLayoutManager = new GridLayoutManager(getContext(), 1, LinearLayoutManager.VERTICAL, false);
             if (isLikeView)
                 profileGridAdapter = new ProfileGridAdapter(null, likesItemList, this);
             else
@@ -288,7 +288,7 @@ public class ProfileFragment extends BaseFragment
 
         setStoriesCount(storiesResponseList.size());
 
-        storiesSec.setOnClickListener(new View.OnClickListener() {
+        /*storiesSec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isLikeView = false;
@@ -302,7 +302,10 @@ public class ProfileFragment extends BaseFragment
                 isLikeView = true;
                 setUpProfileGrid();
             }
-        });
+        });*/
+
+        isLikeView = true;
+        setUpProfileGrid();
     }
 
     private void setUserProfilePicture() {

@@ -49,6 +49,9 @@ dependencies {
 
 
     testImplementation 'junit:junit:4.12'
+    implementation 'com.robertlevonyan.view:CustomFloatingActionButton:2.1.0'
+
+
 
 }
 apply plugin: 'com.google.gms.google-services'

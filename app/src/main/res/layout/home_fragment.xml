@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/fp_swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <android.support.v7.widget.Toolbar
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:id="@+id/toolbar"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite">
+
+
+                    <EditText
+                        android:id="@+id/header"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/Home"
+                        android:textAllCaps="true"
+                        android:cursorVisible="false"
+                        android:textStyle="bold"
+                        android:background="@drawable/header"
+                        android:gravity="center"
+                        android:editable="false"
+                        android:inputType="none"
+                        android:drawableRight="@android:drawable/ic_menu_search"
+                        />
+
+
+                    <SearchView
+                        android:id="@+id/search"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:queryHint="@string/Home"
+                        android:iconifiedByDefault="false"
+                        android:background="@color/profileSubHeaderText"
+                         />
+
+                </android.support.v7.widget.Toolbar>
+
+                <include layout="@layout/header_sub_profile"  android:visibility="gone"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/fp_likes_rv"
+                    android:layout_below="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:nestedScrollingEnabled="false" />
+            </RelativeLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</android.support.design.widget.CoordinatorLayout>

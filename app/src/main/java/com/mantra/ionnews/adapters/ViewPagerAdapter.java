@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.mantra.ionnews.ui.fragments.HomeFragment;
 import com.mantra.ionnews.ui.fragments.NewsFragment;
 import com.mantra.ionnews.ui.fragments.ProfileFragment;
 
@@ -21,9 +22,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int pos) {
         switch (pos) {
             case 0:
-                return ProfileFragment.newInstance();
-            case 1:
-                return NewsFragment.newInstance();
+                return HomeFragment.newInstance();
             default:
                 return null;
         }
@@ -31,6 +30,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 1;
     }
 }

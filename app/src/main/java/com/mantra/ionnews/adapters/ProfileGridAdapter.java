@@ -45,7 +45,7 @@ public class ProfileGridAdapter extends RecyclerView.Adapter<ProfileGridAdapter.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_profile_grid, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_item_layout, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,11 +62,11 @@ public class ProfileGridAdapter extends RecyclerView.Adapter<ProfileGridAdapter.
         String titleStr = null;
         if (isLikeView) {
             story = storyList.get(position);
-            titleStr = story.getTitle();
+            titleStr = story.getTags().replace("#","");
         } else {
             story = storiesResponses.get(position).getCategoryStories().get(0);
             titleStr = storiesResponses.get(position).getCategoryTitle();
-            viewHolder.news.setText(story.getTitle());
+            // viewHolder.news.setText(story.getTitle());
         }
 
         Typeface typeface = Typeface.createFromAsset(viewHolder.title.getContext().getAssets(), "OpenSans-Bold.ttf");
@@ -83,7 +83,7 @@ public class ProfileGridAdapter extends RecyclerView.Adapter<ProfileGridAdapter.
 //                } else {
 //                    viewHolder.image.setBackgroundDrawable(new BitmapDrawable(viewHolder.item.getContext().getResources(), bitmap));
 //                }
-                setUpTranslucentView(viewHolder.item, viewHolder.translucentView);
+               // setUpTranslucentView(viewHolder.item, viewHolder.translucentView);
             }
 
             @Override
@@ -167,19 +167,17 @@ public class ProfileGridAdapter extends RecyclerView.Adapter<ProfileGridAdapter.
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        public SquareRelativeLayout item;
         public TextView title, news;
         public ImageView options, image;
         public View translucentView;
 
         public ViewHolder(View itemView) {
+
             super(itemView);
-            item = (SquareRelativeLayout) itemView.findViewById(R.id.ipg_entire_item);
             image = (ImageView) itemView.findViewById(R.id.ipg_image);
             title = (TextView) itemView.findViewById(R.id.ipg_title);
             news = (TextView) itemView.findViewById(R.id.ipg_news);
-            options = (ImageView) itemView.findViewById(R.id.ipg_options);
-            translucentView = itemView.findViewById(R.id.ipg_translucent_overlay);
+
         }
     }
 }

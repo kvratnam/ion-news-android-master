@@ -1,9 +1,11 @@
 package com.mantra.ionnews.ui.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.bottomappbar.BottomAppBar;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
@@ -11,10 +13,16 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.mantra.ionnews.R;
 import com.mantra.ionnews.adapters.ViewPagerAdapter;
@@ -28,6 +36,7 @@ import com.mantra.ionnews.models.FragmentState;
 import com.mantra.ionnews.models.responses.Error;
 import com.mantra.ionnews.ui.fragments.BaseFragment;
 import com.mantra.ionnews.ui.fragments.EditProfileFragment;
+import com.mantra.ionnews.ui.fragments.HomeFragment;
 import com.mantra.ionnews.ui.fragments.ProfileFragment;
 import com.mantra.ionnews.ui.fragments.SearchFragment;
 import com.mantra.ionnews.ui.fragments.SettingsFragment;
@@ -42,6 +51,7 @@ import de.greenrobot.event.EventBus;
 
 import static com.mantra.ionnews.utils.ConstantClass.DASHBOARD;
 import static com.mantra.ionnews.utils.ConstantClass.EDIT_PROFILE;
+import static com.mantra.ionnews.utils.ConstantClass.HOME;
 import static com.mantra.ionnews.utils.ConstantClass.ON_GOTO_NEWS_FRAGMENT;
 import static com.mantra.ionnews.utils.ConstantClass.ON_GOTO_PROFILE_FRAGMENT;
 import static com.mantra.ionnews.utils.ConstantClass.PROFILE;
@@ -61,6 +71,7 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
 
     private boolean isFromNotification = false;
     private boolean doubleBackToExitPressedOnce;
+
     public static BottomNavigationView bottomNavigationView;
 
     @Override
@@ -76,6 +87,20 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
         fetchStories();
         searchByTAG();
         disableShiftMode(bottomNavigationView);
+
+
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);;
+        for (int i = 0; i < menuView.getChildCount(); i++) {
+            final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
+            final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
+            final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+            layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
+            layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
+            iconView.setLayoutParams(layoutParams);
+        }
+
+
+
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -84,13 +109,13 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
                         Fragment fragment = null;
                         switch (item.getItemId()) {
                             case R.id.action_item1:
-                                fragment = new BaseFragment();
+                                fragment = new HomeFragment();
                                 break;
                             case R.id.action_item2:
                                 fragment = new ProfileFragment();
                                 break;
                             case R.id.action_item3:
-                                fragment=new SearchFragment();
+                              //  fragment=new SearchFragment();
                                 break;
                             case R.id.action_item4:
                                 openThisFragment(EDIT_PROFILE);
@@ -120,7 +145,7 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
     private void setUpViewPager() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(0);
     }
 
     private void initView() {
@@ -134,7 +159,7 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
 
     public void onEvent(FragmentState fragmentState) {
         Log.d(TAG, fragmentState.getVisibleFragment());
-        if (fragmentState.getVisibleFragment().equals(PROFILE)) {
+        if (fragmentState.getVisibleFragment().equals(HOME)) {
 
         }
     }
@@ -265,5 +290,9 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
 
         }
 
+    public static float dipToPixels(Context context, float dipValue){
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,  dipValue, metrics);
+    }
 
 }

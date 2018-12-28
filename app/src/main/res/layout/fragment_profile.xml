@@ -8,6 +8,7 @@
         android:id="@+id/fp_app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -42,7 +43,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <include layout="@layout/header_sub_profile" />
+                <include layout="@layout/header_sub_profile" android:visibility="gone" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/fp_likes_rv"

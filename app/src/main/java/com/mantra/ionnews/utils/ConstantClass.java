@@ -18,6 +18,7 @@ public class ConstantClass {
     public static final String WEB_VIEW = "WebView ==>";
     // Fragments
     public static final String PROFILE = "PROFILE";
+    public static final String HOME = "HOME";
     public static final String NEWS = "NEWS";
     public static final String STORIES = "STORIES";
     public static final String SETTINGS = "SETTINGS";

@@ -10,25 +10,80 @@
         android:layout_width="match_parent"
         android:layout_marginBottom="55dp"
         android:layout_height="match_parent" />
-<!-- android:layout_above="@+id/bottomBar"-->
     <FrameLayout
         android:id="@+id/ad_fragment_container"
         android:layout_width="match_parent"
         android:layout_marginBottom="55dp"
         android:layout_height="match_parent" />
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        app:itemIconTint="@drawable/bottom_navigation_selection"
-        app:itemTextColor="@drawable/bottom_navigation_selection"
-        android:layout_gravity="bottom"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/navigation"/>
+        android:layout_height="match_parent"
+        >
 
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/navigation"/>
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/colorPrimary"
+            app:itemIconTint="@drawable/bottom_navigation_selection"
+            app:itemTextColor="@drawable/bottom_navigation_selection"
+            android:layout_alignParentBottom="true"
+            app:labelVisibilityMode="labeled"
+            android:layout_gravity="bottom"
+            app:menu="@menu/navigation" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            app:borderWidth="0dp"
+            android:visibility="gone"
+            android:background="@drawable/header"
+            android:backgroundTint="@color/colorButton"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:clickable="true"
+            app:elevation="8dp"
+            app:srcCompat="@drawable/ic_news_grid_layout" />
+
+
+        <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionLayout
+            android:id="@+id/customFABL"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:background="@color/colorAccent"
+            app:fabColor="@color/colorButton"
+            app:fabType="roundedSquare"
+            app:srcCompat="@drawable/ic_news_grid_layout"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:src="@drawable/home" />
+
+        </LinearLayout>
+        </com.robertlevonyan.views.customfloatingactionbutton.FloatingActionLayout>
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

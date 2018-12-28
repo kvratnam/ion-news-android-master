@@ -12,8 +12,10 @@ import android.widget.TextView;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.mantra.ionnews.R;
+import com.mantra.ionnews.datahandlers.ForgotPasswordDataHandler;
 import com.mantra.ionnews.datahandlers.SignInDataHandler;
 import com.mantra.ionnews.interfaces.BaseResponseInterface;
+import com.mantra.ionnews.interfaces.OnForgotPasswordResponseListener;
 import com.mantra.ionnews.models.responses.Error;
 import com.mantra.ionnews.restclient.RequestBuilder;
 import com.mantra.ionnews.ui.dialogs.BaseBottomSheetDialog;
@@ -22,10 +24,11 @@ import com.mantra.ionnews.utils.Util;
 import com.mantra.ionnews.utils.Validator;
 
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener, BaseResponseInterface {
+public class LoginActivity extends BaseActivity implements View.OnClickListener, BaseResponseInterface, OnForgotPasswordResponseListener {
     private EditText etEmail, etPassword;
     Button buttonSignIn;
     private TextView tvSignUp;
+    private TextView tvForgotPassword;
 
 
 
@@ -59,8 +62,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         etPassword = (EditText) findViewById(R.id.fsi_password);
         buttonSignIn = (Button) findViewById(R.id.fsi_sign_in);
         tvSignUp = (TextView) findViewById(R.id.ao_sign_up);
+        tvForgotPassword = (TextView) findViewById(R.id.cfp_email);
+        tvForgotPassword.setOnClickListener(this);
         tvSignUp.setOnClickListener(this);
         buttonSignIn.setOnClickListener(this);
+
+        etEmail.setText("ramasamy.vcp@gmail.com");
+        etPassword.setText("123456");
+
+
 
 
     }
@@ -74,6 +84,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             case R.id.ao_sign_up:
                 Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.cfp_email:
+                performForgotPassword(etEmail.getText().toString());
                 break;
 
 
@@ -147,6 +160,27 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+
+    private void performForgotPassword(String emailInput) {
+        showProgressDialog(getString(R.string.loading));
+        ForgotPasswordDataHandler forgotPasswordDataHandler = new ForgotPasswordDataHandler(this, getApplicationContext());
+        forgotPasswordDataHandler.request(RequestBuilder.getForgotPasswordRequest(emailInput));
+    }
+
+    @Override
+    public void forgotPasswordResponse(String message, Error error) {
+        hideProgressDialog();
+        if (error == null) {
+            onForgotPasswordSuccess();
+        } else {
+            showToastMessage(error.getMessage(), false);
+        }
+    }
+
+    private void onForgotPasswordSuccess() {
 
     }
 }
