@@ -99,9 +99,10 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
             final View iconView = bottomNavigationMenuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
             final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
             final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-            layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
-            layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
+            layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, displayMetrics);
+            layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, displayMetrics);
             iconView.setLayoutParams(layoutParams);
+
         }
 
 
@@ -158,9 +159,11 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
         viewPager = (ViewPager) findViewById(R.id.ad_view_pager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         imageViewCompanyLogo = (ImageView) findViewById(R.id.company_logo);
-        PicasoImageLoader.with(DashboardActivity.this)
+       /* PicasoImageLoader.with(DashboardActivity.this)
                 .load(LocalStorage.getInstance(DashboardActivity.this).getCompanyImageUrl())
-                .into(imageViewCompanyLogo);
+                .into(imageViewCompanyLogo);*/
+        imageViewCompanyLogo.setImageResource(R.drawable.bottom_logo);
+        imageViewCompanyLogo.setAdjustViewBounds(true);
     }
 
     protected void registerEventBus() {

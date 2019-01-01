@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -29,6 +30,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     Button buttonSignIn;
     private TextView tvSignUp;
     private TextView tvForgotPassword;
+    ImageView imageView;
 
 
 
@@ -63,12 +65,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         buttonSignIn = (Button) findViewById(R.id.fsi_sign_in);
         tvSignUp = (TextView) findViewById(R.id.ao_sign_up);
         tvForgotPassword = (TextView) findViewById(R.id.cfp_email);
+        imageView = (ImageView) findViewById(R.id.inside_imageview);
+        imageView.setAdjustViewBounds(true);
         tvForgotPassword.setOnClickListener(this);
         tvSignUp.setOnClickListener(this);
         buttonSignIn.setOnClickListener(this);
 
-        etEmail.setText("ramasamy.vcp@gmail.com");
-        etPassword.setText("123456");
+
 
 
 
@@ -86,7 +89,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 startActivity(intent);
                 break;
             case R.id.cfp_email:
-                performForgotPassword(etEmail.getText().toString());
+                /*Intent intentForgotpassword = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(intentForgotpassword);*/
                 break;
 
 

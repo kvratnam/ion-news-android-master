@@ -15,7 +15,11 @@
         android:background="@color/colorWhite"
         android:orientation="vertical">
 
-        <include layout="@layout/activity_header_layout"/>
+        <ImageView
+            android:id="@+id/inside_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/signup_logo" />
 
 
         <TextView

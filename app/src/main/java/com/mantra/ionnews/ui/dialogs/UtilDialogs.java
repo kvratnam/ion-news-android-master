@@ -2,11 +2,13 @@ package com.mantra.ionnews.ui.dialogs;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.mantra.ionnews.R;
+import com.mantra.ionnews.ui.activities.LoginActivity;
 
 /**
  * Created by TaNMay on 30/03/17.
@@ -17,7 +19,7 @@ public class UtilDialogs {
     public UtilDialogs() {
     }
 
-    public void showSingleButtonDialog(Context context, String title, String message, String btnText) {
+    public void showSingleButtonDialog(final Context context, String title, String message, String btnText) {
         LayoutInflater factory = LayoutInflater.from(context);
         final View infoDialogView = factory.inflate(
                 R.layout.dialog_single_button, null);
@@ -34,6 +36,10 @@ public class UtilDialogs {
             @Override
             public void onClick(View v) {
                 infoDialog.dismiss();
+
+                // change activity screen for forget password success
+                Intent intent= new Intent(context,LoginActivity.class);
+                context.startActivity(intent);
             }
         });
         infoDialog.show();

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -48,6 +49,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
     private String selectedUserGroup = null;
     private int selectedUserGroupId = -1;
     private User user;
+    ImageView imageView;
 
 
 
@@ -77,6 +79,8 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         textViewSingUp.setOnClickListener(this);
         userGroupDropDown = (TextInputLayout) findViewById(R.id.fsu_user_group_drop_down);
         mainView = (LinearLayout) findViewById(R.id.fsu_main_view);
+        imageView = (ImageView) findViewById(R.id.inside_imageview);
+        imageView.setAdjustViewBounds(true);
 
         disableEditTexts(etUserGroup);
 

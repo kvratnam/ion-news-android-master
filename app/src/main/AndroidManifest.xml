@@ -54,6 +54,13 @@
 
 
         <activity
+            android:name=".ui.activities.ForgotPasswordActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+
+        <activity
             android:name=".ui.activities.OnboardingActivity"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
@@ -63,7 +70,6 @@
 
         <activity
             android:name=".ui.activities.DashboardActivity"
-            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -75,7 +81,6 @@
 
         <activity
             android:name=".ui.activities.WebViewActivity"
-            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
