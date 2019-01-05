@@ -158,6 +158,9 @@ public class DashboardActivity extends BaseActivity implements BaseResponseInter
     private void initView() {
         viewPager = (ViewPager) findViewById(R.id.ad_view_pager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigationView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+
         imageViewCompanyLogo = (ImageView) findViewById(R.id.company_logo);
        /* PicasoImageLoader.with(DashboardActivity.this)
                 .load(LocalStorage.getInstance(DashboardActivity.this).getCompanyImageUrl())

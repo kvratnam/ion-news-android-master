@@ -45,7 +45,7 @@ public class ProfileGridAdapter extends RecyclerView.Adapter<ProfileGridAdapter.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_item_layout, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.favourite_fragment, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
         v.setOnClickListener(new View.OnClickListener() {
             @Override

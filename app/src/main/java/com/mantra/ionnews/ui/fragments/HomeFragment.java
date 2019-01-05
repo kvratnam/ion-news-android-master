@@ -28,12 +28,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.mantra.ionnews.R;
+import com.mantra.ionnews.adapters.ExpandableListAdapter;
 import com.mantra.ionnews.adapters.HomeFragmentAdapter;
 import com.mantra.ionnews.datahandlers.GetAllLikesDataHandler;
 import com.mantra.ionnews.interfaces.OnFragmentEventTagListener;
@@ -60,6 +62,7 @@ import com.squareup.picasso.Target;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -105,6 +108,8 @@ public class HomeFragment extends BaseFragment
 
     private SearchView searchView = null;
     private SearchView.OnQueryTextListener queryTextListener;
+
+
 
     private Target target = new Target() {
         @Override
@@ -192,6 +197,74 @@ public class HomeFragment extends BaseFragment
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+
+
+     /*   expandableListView = (ExpandableListView)layout.findViewById(R.id.expandableListView);
+
+        //Static
+        expandableListDetail = getData();
+
+
+        expandableListHeader = new ArrayList<String>(expandableListDetail.keySet());
+        expandableListAdapter = new ExpandableListAdapter(getActivity(), expandableListHeader, expandableListDetail);
+        expandableListView.setAdapter(expandableListAdapter);
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                parent.smoothScrollToPosition(groupPosition);
+
+                if (parent.isGroupExpanded(groupPosition)) {
+                    ImageView imageView = v.findViewById(R.id.expandable_icon1);
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_drop_down_black_24dp));
+
+
+
+                } else {
+                    ImageView imageView = v.findViewById(R.id.expandable_icon1);
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_drop_up_black_24dp));
+                }
+
+                //  showToastMessage(expandableListHeader.get(groupPosition));
+
+                return false    ;
+            }
+        });
+
+
+        *//*storiesResponseList = LocalStorage.getInstance(getContext()).getStories();
+
+        for(int i =0 ;i<storiesResponseList.size();i++)
+        {
+            titleStr = storiesResponseList.get(i).getCategoryTitle();
+            expandableListHeader.add(titleStr);
+        }
+*//*
+
+
+
+        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+
+                //   showToastMessage(expandableListHeader.get(groupPosition));
+
+            }
+        });
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+
+
+                //   showToastMessage(expandableListDetail.get(expandableListHeader.get(groupPosition)).get(childPosition));
+                return false;
+            }
+        });*/
+
 
         return layout;
     }
@@ -513,6 +586,17 @@ public class HomeFragment extends BaseFragment
     //Search  Action
     public void searchQuery(String query) {
     }
+
+   /* public HashMap<String, List<String>> getData() {
+        HashMap<String, List<String>> expandableListDetail = new HashMap<String, List<String>>();
+        for(int i =0 ;i<storiesResponseList.size();i++)
+        {
+            titleStr = storiesResponseList.get(i).getCategoryTitle();
+            expandableListDetail.get(titleStr);
+        }
+
+        return expandableListDetail;
+    }*/
 
 
 }
